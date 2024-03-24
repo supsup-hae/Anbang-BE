@@ -9,20 +9,22 @@
 ```
 ├── ReadMe.md
 ├── bin
-│   ├── configtxgen
-│   ├── cryptogen
-│   └── peer
+│   ├── configtxgen
+│   ├── cryptogen
+│   └── peer
 ├── channel
-│   ├── CC.sh
-│   ├── GC.sh
-│   ├── channel-artifacts
-│   └── init-artifacts
+│   ├── CC.sh
+│   ├── GC.sh
+│   ├── channel-artifacts
+│   └── init-artifacts
 ├── config
-│   ├── base.yaml
-│   ├── configtx.yaml
-│   ├── core.yaml
-│   └── crypto-config.yaml
+│   ├── base.yaml
+│   ├── configtx.yaml
+│   ├── core.yaml
+│   └── crypto-config.yaml
+├── deployCC.sh
 └── docker-compose.yaml
+
 ```
 ## 3. 네트워크 구축 단계
 1. 실행 파일이 있는 폴더로 이동. 
@@ -43,3 +45,13 @@
 - `./CC.sh joinChannel`
 9. 앵커 피어 업데이트
 - `./CC.sh updateAnchorPeers`
+
+## 4. 체인코드 배포 단계
+1. 체인코드 배포 스크립트가 있는 폴더로 이동
+- `cd chaincode`
+2. 체인코드 설치를 위한 준비
+- `./deployCC.sh setup`
+3. 체인코드 패키징
+- `./deployCC.sh packageChaincode`
+4. 체인코드 설치
+- `./deployCC.sh installChaincode`
