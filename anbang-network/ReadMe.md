@@ -6,6 +6,7 @@
 
 ## 2. 파일 구조
 
+```
 ├── ReadMe.md
 ├── bin
 │   ├── configtxgen
@@ -22,7 +23,7 @@
 │   ├── core.yaml
 │   └── crypto-config.yaml
 └── docker-compose.yaml
-
+```
 ## 3. 네트워크 구축 단계
 1. 실행 파일이 있는 폴더로 이동. 
 - `cd channel`
