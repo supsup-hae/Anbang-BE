@@ -49,7 +49,7 @@ CC_VERSION="1.0"
 CC_RUNTIME_LANGUAGE="java"
 
 # 체인 코드 준비
-setup(){
+function setup(){
   rm -rf ${CC_SRC_PATH}/build
    echo "Compiling Java code..."
    pushd $CC_SRC_PATH || exit
@@ -58,9 +58,8 @@ setup(){
    echo "Finished compiling Java code"
 }
 
-setup
 
-packageChaincode() {
+function packageChaincode() {
   rm -rf ${CC_NAME}.tar.gz
   rm -rf log.txt
   CC_SRC_PATH=../anbang-chaincode/build/libs/anbang-chaincode-1.0-SNAPSHOT.jar
@@ -69,9 +68,8 @@ packageChaincode() {
    --label ${CC_NAME}_${CC_VERSION} >&log.txt
 }
 
-packageChaincode
 
-installChaincode() {
+function installChaincode() {
     setGlobalsForPeer0Org1
     peer lifecycle chaincode install ${CC_NAME}.tar.gz
     echo "===================== Chaincode is installed on peer0.org1 ===================== "
@@ -84,4 +82,9 @@ installChaincode() {
     peer lifecycle chaincode install ${CC_NAME}.tar.gz
     echo "===================== Chaincode is installed on peer0.org3 ===================== "
 }
-installChaincode
+
+if [ -n "$1" ]; then
+    $1
+else
+    echo "Usage: $0 <function_name>"
+fi
