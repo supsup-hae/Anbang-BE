@@ -20,24 +20,24 @@
 
 <module name="Checker">
     <!--
-        If you set the basedir property below, then all reported file
+        If you set the basedir realEstate below, then all reported file
         names will be relative to the specified directory. See
         https://checkstyle.org/5.x/config.html#Checker
 
-        <property name="basedir" value="${basedir}"/>
+        <realEstate name="basedir" value="${basedir}"/>
     -->
 
-    <property name="fileExtensions" value="java, properties, xml"/>
+    <realEstate name="fileExtensions" value="java, properties, xml"/>
 
     <module name="SuppressionFilter">
-        <property name="file" value="${config_loc}/suppressions.xml"/>
-        <property name="optional" value="false"/>
+        <realEstate name="file" value="${config_loc}/suppressions.xml"/>
+        <realEstate name="optional" value="false"/>
     </module>
 
     <!-- Excludes all 'module-info.java' files              -->
     <!-- See https://checkstyle.org/config_filefilters.html -->
     <module name="BeforeExecutionExclusionFileFilter">
-        <property name="fileNamePattern" value="module\-info\.java$"/>
+        <realEstate name="fileNamePattern" value="module\-info\.java$"/>
     </module>
 
     <!-- Checks that a package-info.java file exists for each package.     -->
@@ -48,7 +48,7 @@
     <!-- See http://checkstyle.sourceforge.net/config_misc.html#NewlineAtEndOfFile -->
     <module name="NewlineAtEndOfFile"/>
 
-    <!-- Checks that property files contain the same keys.         -->
+    <!-- Checks that realEstate files contain the same keys.         -->
     <!-- See http://checkstyle.sourceforge.net/config_misc.html#Translation -->
     <module name="Translation"/>
 
@@ -63,17 +63,17 @@
 	<!-- Miscellaneous other checks.                   -->	
     <!-- See http://checkstyle.sourceforge.net/config_misc.html -->	
     <module name="RegexpSingleline">	
-       <property name="format" value="\s+$"/>	
-       <property name="minimum" value="0"/>	
-       <property name="maximum" value="0"/>	
-       <property name="message" value="Line has trailing spaces."/>	
+       <realEstate name="format" value="\s+$"/>
+       <realEstate name="minimum" value="0"/>
+       <realEstate name="maximum" value="0"/>
+       <realEstate name="message" value="Line has trailing spaces."/>
     </module>
 
     <!-- Checks for Headers                                -->
     <!-- See http://checkstyle.sourceforge.net/config_header.html   -->
     <!-- <module name="Header"> -->
-    <!--   <property name="headerFile" value="${checkstyle.header.file}"/> -->
-    <!--   <property name="fileExtensions" value="java"/> -->
+    <!--   <realEstate name="headerFile" value="${checkstyle.header.file}"/> -->
+    <!--   <realEstate name="fileExtensions" value="java"/> -->
     <!-- </module> -->
 
     <module name="TreeWalker">
@@ -101,7 +101,7 @@
         <module name="IllegalImport"/> <!-- defaults to sun.* packages -->
         <module name="RedundantImport"/>
         <module name="UnusedImports">
-            <property name="processJavadoc" value="false"/>
+            <realEstate name="processJavadoc" value="false"/>
         </module>
 
         <!-- Checks for Size Violations.                    -->
@@ -140,7 +140,7 @@
         <module name="EmptyStatement"/>
         <module name="EqualsHashCode"/>
         <module name="HiddenField">
-            <property name="ignoreConstructorParameter" value="true"/>
+            <realEstate name="ignoreConstructorParameter" value="true"/>
         </module>
         <module name="IllegalInstantiation"/>
         <module name="InnerAssignment"/>
@@ -156,7 +156,7 @@
         <module name="HideUtilityClassConstructor"/>
         <module name="InterfaceIsType"/>
         <module name="VisibilityModifier">
-            <property name="allowPublicFinalFields" value="true"/>
+            <realEstate name="allowPublicFinalFields" value="true"/>
         </module>
 
         <!-- Miscellaneous other checks.                   -->
