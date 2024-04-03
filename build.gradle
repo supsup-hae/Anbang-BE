@@ -19,9 +19,15 @@ configurations {
 
 repositories {
     mavenCentral()
+    maven {
+        url 'https://jitpack.io'
+    }
 }
 
 dependencies {
+    //hyperledger
+    implementation 'org.hyperledger.fabric-chaincode-java:fabric-chaincode-shim:2.5.1'
+
     implementation files('build/libs/anbang-chaincode-1.0-SNAPSHOT.jar')
     implementation files('build/libs/anbang-chaincode.jar')
     implementation 'org.springframework.boot:spring-boot-starter-web'
