@@ -1,6 +1,7 @@
 package org.example.anbang_server.service;
 
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.UUID;
 import org.anbang.realestate.transfer.AnbangRealEstateTransfer;
@@ -15,7 +16,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class RealEstateServiceImpl implements RealEstateService {
 
-  private final static ShellRunner SHELL_RUNNER = new ShellRunner();
   private final static String[] CALL_CMD = {"/bin/bash", "-c",
       "sh src/main/resources/script/SC.sh"};
   private final static AnbangRealEstateTransfer TRANSFER = new AnbangRealEstateTransfer();
@@ -106,7 +106,6 @@ public class RealEstateServiceImpl implements RealEstateService {
   @Override
   @Transaction
   public void buildChannelCA() {
-    Map<Integer, String> map = SHELL_RUNNER.execCommand(CALL_CMD);
-    System.out.println(map);
+    ShellRunner.execCommand(Arrays.toString(CALL_CMD));
   }
 }

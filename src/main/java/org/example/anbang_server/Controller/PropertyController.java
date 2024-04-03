@@ -64,6 +64,6 @@ public class PropertyController {
   @GetMapping("/test")
   public ResponseEntity<String> buildServerCA() {
     propertyService.buildChannelCA();
-    return new ResponseEntity<>(HttpStatus.OK);
+    return new ResponseEntity<>("Fabric CA Channel Built",HttpStatus.OK);
   }
 }
