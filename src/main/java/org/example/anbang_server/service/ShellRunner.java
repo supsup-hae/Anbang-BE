@@ -6,22 +6,27 @@ import java.io.InputStreamReader;
 
 public class ShellRunner {
 
+  private final static int BUFFER_SIZE = 8192 * 4;
+
   public static void execCommand(String command) {
     try {
-      // Execute the command
       Process process = Runtime.getRuntime().exec(command);
 
-      // Get the input stream of the process
-      BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+      BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()),
+          BUFFER_SIZE);
+      BufferedReader errorReader = new BufferedReader(
+          new InputStreamReader(process.getErrorStream()), BUFFER_SIZE);
+      String errorLine = null;
+      String line = null;
 
-      // Read the output of the process line by line
-      String line;
-      while ((line = reader.readLine()) != null) {
-        // Display the output in real-time
-        System.out.println(line);
+      while ((line = reader.readLine()) != null || (errorLine = errorReader.readLine()) != null) {
+        if (line != null) {
+          System.out.println(line);
+        } else {
+          System.err.println(errorLine);
+        }
       }
 
-      // Wait for the process to finish
       int exitCode = process.waitFor();
       System.out.println("Script execution finished with exit code: " + exitCode);
 
