@@ -21,7 +21,6 @@ public class RealEstateServiceImpl implements RealEstateService {
   private final static AnbangRealEstateTransfer TRANSFER = new AnbangRealEstateTransfer();
 
   @Override
-  @Transaction
   public ResponseEntity<String> createRealEstate(TransactionContext ctx, RealEstate realEstate) {
     try {
       TRANSFER.createAnbangRealEstate(ctx, realEstate.getHomeID(), realEstate.getOwner(),
@@ -36,7 +35,6 @@ public class RealEstateServiceImpl implements RealEstateService {
 
 
   @Override
-  @Transaction
   public ResponseEntity<String> searchRealEstate(TransactionContext ctx, String homeID) {
     try {
       return new ResponseEntity(TRANSFER.readAnbangRealEstate(ctx, homeID), HttpStatus.OK);
@@ -47,7 +45,6 @@ public class RealEstateServiceImpl implements RealEstateService {
   }
 
   @Override
-  @Transaction
   public ResponseEntity<String> updateRealEstate(TransactionContext ctx, RealEstate realEstate) {
     try {
       return new ResponseEntity<>(
@@ -60,7 +57,6 @@ public class RealEstateServiceImpl implements RealEstateService {
   }
 
   @Override
-  @Transaction
   public ResponseEntity<String> transferRealEstate(TransactionContext ctx, String homeID,
       String newOwner) {
     try {
@@ -73,7 +69,6 @@ public class RealEstateServiceImpl implements RealEstateService {
   }
 
   @Override
-  @Transaction
   public ResponseEntity<String> deleteRealEstate(TransactionContext ctx, String homeID) {
     try {
       TRANSFER.deleteAnbangRealEstate(ctx, homeID);
@@ -85,7 +80,6 @@ public class RealEstateServiceImpl implements RealEstateService {
   }
 
   @Override
-  @Transaction
   public ResponseEntity<String> queryAllRealEstate(TransactionContext ctx) {
     try {
       return new ResponseEntity<>(TRANSFER.queryAllAnbangRealEstate(ctx), HttpStatus.OK);
