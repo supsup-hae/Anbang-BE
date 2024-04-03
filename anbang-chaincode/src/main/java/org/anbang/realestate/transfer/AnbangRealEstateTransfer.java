@@ -29,7 +29,7 @@ import com.owlike.genson.Genson;
                         name = "Apache 2.0 License",
                         url = "http://www.apache.org/licenses/LICENSE-2.0.html"),
                 contact = @Contact(
-                        email = "anbang.com",
+                        email = "capstone@anbang.com",
                         name = "AnbangRealEstateTransfer",
                         url = "https://hyperledger.example.com")))
 
