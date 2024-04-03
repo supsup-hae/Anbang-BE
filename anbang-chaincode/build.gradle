@@ -54,7 +54,7 @@ dependencies {
     }
 
     checkstyleTest{
-       source ='src/main/java/org/anbang/realestate/transfer/test'
+       source ='src/test/java/org/anbang/realestate/transfer/test'
     }
 
 jacocoTestReport{
