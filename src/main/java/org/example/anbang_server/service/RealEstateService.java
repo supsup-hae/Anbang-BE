@@ -20,6 +20,9 @@ public interface RealEstateService {
 
   ResponseEntity<String> queryAllRealEstate(TransactionContext ctx);
 
-
   void buildChannelCA();
+
+  void deployChainCode();
+
+  ResponseEntity<String> enrollClient(String userId);
 }

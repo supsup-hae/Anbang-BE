@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -61,9 +62,21 @@ public class PropertyController {
     return propertyService.queryAllRealEstate(ctx);
   }
 
-  @GetMapping("/test")
+  @GetMapping("/build")
   public ResponseEntity<String> buildServerCA() {
     propertyService.buildChannelCA();
-    return new ResponseEntity<>("Fabric CA Channel Built",HttpStatus.OK);
+    return new ResponseEntity<>("Fabric CA Channel Built", HttpStatus.OK);
   }
+
+  @GetMapping("/deploy")
+  public ResponseEntity<String> deployChainCode() {
+    propertyService.deployChainCode();
+    return new ResponseEntity<>("ChainCode Deploy Success", HttpStatus.OK);
+  }
+
+  @PostMapping("/enroll")
+  public ResponseEntity<String> enrollClient(@RequestBody String userId) {
+    return propertyService.enrollClient(userId);
+  }
+
 }
