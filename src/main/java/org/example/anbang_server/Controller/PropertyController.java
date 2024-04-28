@@ -1,7 +1,8 @@
 package org.example.anbang_server.Controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.example.anbang_server.model.RealEstate;
+import org.example.anbang_server.dto.RealEstateDto;
+import org.example.anbang_server.dto.UserDto;
 import org.example.anbang_server.model.TransactionContext;
 import org.example.anbang_server.service.RealEstateServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,34 +28,33 @@ public class PropertyController {
   }
 
   @PostMapping("/create")
-  public ResponseEntity<String> createRealEstate(RealEstate realEstate) {
-    return propertyService.createRealEstate(context, realEstate);
+  public ResponseEntity<String> createRealEstate(@RequestBody RealEstateDto realEstateDto) {
+    return propertyService.createRealEstate(context, realEstateDto);
   }
 
   @GetMapping("/search")
-  public ResponseEntity<String> searchRealEstate(String homeID) {
-    return propertyService.searchRealEstate(context, homeID);
+  public ResponseEntity<String> searchRealEstate(@RequestBody RealEstateDto realEstateDto) {
+    return propertyService.searchRealEstate(context, realEstateDto.getHomeID());
   }
 
   @PostMapping("/update")
-  public ResponseEntity<String> updateRealEstate(RealEstate realEstate) {
-    return propertyService.updateRealEstate(context, realEstate);
+  public ResponseEntity<String> updateRealEstate(@RequestBody RealEstateDto realEstateDto) {
+    return propertyService.updateRealEstate(context, realEstateDto);
   }
 
   @PostMapping("/transfer")
-  public ResponseEntity<String> transferRealEstate(String homeID,
-      String newOwner) {
-    return propertyService.transferRealEstate(context, homeID, newOwner);
+  public ResponseEntity<String> transferRealEstate(@RequestBody RealEstateDto realEstateDto) {
+    return propertyService.transferRealEstate(context, realEstateDto.getHomeID(), realEstateDto.getOwner());
   }
 
   @GetMapping("/delete")
-  public ResponseEntity<String> deleteRealEstate(String homeID) {
-    return propertyService.deleteRealEstate(context, homeID);
+  public ResponseEntity<String> deleteRealEstate(@RequestBody RealEstateDto realEstateDto) {
+    return propertyService.deleteRealEstate(context, realEstateDto.getHomeID());
   }
 
   @GetMapping("/exists")
-  public ResponseEntity<String> realEstateExists(String homeID) {
-    return propertyService.realEstateExists(context, homeID);
+  public ResponseEntity<String> realEstateExists(@RequestBody RealEstateDto realEstateDto) {
+    return propertyService.realEstateExists(context, realEstateDto.getHomeID());
   }
 
   @GetMapping("/query-all")
@@ -75,8 +75,8 @@ public class PropertyController {
   }
 
   @PostMapping("/enroll")
-  public ResponseEntity<String> enrollClient(@RequestBody String userId) {
-    return propertyService.enrollClient(userId);
+  public ResponseEntity<String> enrollClient(@RequestBody UserDto userDto) {
+    return propertyService.enrollClient(userDto.getId());
   }
 
 }

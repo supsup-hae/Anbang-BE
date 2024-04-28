@@ -4,7 +4,7 @@ package org.example.anbang_server.service;
 import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
 import org.anbang.realestate.transfer.AnbangRealEstateTransfer;
-import org.example.anbang_server.model.RealEstate;
+import org.example.anbang_server.dto.RealEstateDto;
 import org.example.anbang_server.model.TransactionContext;
 import org.hyperledger.fabric.shim.ChaincodeException;
 import org.springframework.http.HttpStatus;
@@ -21,11 +21,11 @@ public class RealEstateServiceImpl implements RealEstateService {
   private final static AnbangRealEstateTransfer TRANSFER = new AnbangRealEstateTransfer();
 
   @Override
-  public ResponseEntity<String> createRealEstate(TransactionContext ctx, RealEstate realEstate) {
+  public ResponseEntity<String> createRealEstate(TransactionContext ctx, RealEstateDto realEstateDto) {
     try {
-      TRANSFER.createAnbangRealEstate(ctx, realEstate.getHomeID(), realEstate.getOwner(),
-          realEstate.getHomeID(),
-          realEstate.getPrice());
+      TRANSFER.createAnbangRealEstate(ctx, realEstateDto.getHomeID(), realEstateDto.getOwner(),
+          realEstateDto.getHomeID(),
+          realEstateDto.getPrice());
       return new ResponseEntity<>(String.valueOf(UUID.randomUUID()), HttpStatus.OK);
     } catch (ChaincodeException e) {
       e.printStackTrace();
@@ -45,11 +45,11 @@ public class RealEstateServiceImpl implements RealEstateService {
   }
 
   @Override
-  public ResponseEntity<String> updateRealEstate(TransactionContext ctx, RealEstate realEstate) {
+  public ResponseEntity<String> updateRealEstate(TransactionContext ctx, RealEstateDto realEstateDto) {
     try {
       return new ResponseEntity<>(
-          TRANSFER.updateAnbangRealEstate(ctx, realEstate.getHomeID(), realEstate.getOwner(),
-              realEstate.getHomeID(), realEstate.getPrice()).toString(), HttpStatus.OK);
+          TRANSFER.updateAnbangRealEstate(ctx, realEstateDto.getHomeID(), realEstateDto.getOwner(),
+              realEstateDto.getHomeID(), realEstateDto.getPrice()).toString(), HttpStatus.OK);
     } catch (ChaincodeException e) {
       e.printStackTrace();
       return new ResponseEntity<>("매물 업데이트 실패", HttpStatus.BAD_REQUEST);
