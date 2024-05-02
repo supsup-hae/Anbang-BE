@@ -31,7 +31,7 @@ sleep 20
 echo " "
 
 # Step 6: channel 디렉토리로 이동
-c
+cd channel
 
 # Step 7: ./CC.sh createChannel 실행
 ./CC.sh createChannel
