@@ -24,7 +24,7 @@ public class RealEstateServiceImpl implements RealEstateService {
   public ResponseEntity<String> createRealEstate(TransactionContext ctx, RealEstateDto realEstateDto) {
     try {
       TRANSFER.createAnbangRealEstate(ctx, realEstateDto.getHomeID(), realEstateDto.getOwner(),
-          realEstateDto.getHomeID(),
+          realEstateDto.getAddress(),
           realEstateDto.getPrice());
       return new ResponseEntity<>(String.valueOf(UUID.randomUUID()), HttpStatus.OK);
     } catch (ChaincodeException e) {

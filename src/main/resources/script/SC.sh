@@ -3,7 +3,7 @@
 echo "채널 생성 시작"
 
 # Step 1: 실행 파일이 있는 폴더로 이동.
-cd ~/anbang-network/channel
+cd ~/hyperledger-fabric/anbang-network
 
 # Step 1-2: docker-compose 실행 종료
 docker-compose down
@@ -12,6 +12,8 @@ sleep 10
 echo " "
 
 # Step 2: ./GC.sh cryptogens 실행
+cd channel
+
 ./GC.sh cryptogens
 echo " "
 
@@ -29,7 +31,7 @@ sleep 20
 echo " "
 
 # Step 6: channel 디렉토리로 이동
-cd channel
+c
 
 # Step 7: ./CC.sh createChannel 실행
 ./CC.sh createChannel
