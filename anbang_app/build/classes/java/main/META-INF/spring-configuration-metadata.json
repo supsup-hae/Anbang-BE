@@ -1,0 +1,73 @@
+{
+  "groups": [
+    {
+      "name": "ca",
+      "type": "org.anbang.com.anbang_app.config.CAClientProperties",
+      "sourceType": "org.anbang.com.anbang_app.config.CAClientProperties"
+    },
+    {
+      "name": "gateway",
+      "type": "org.anbang.com.anbang_app.config.GatewayProperties",
+      "sourceType": "org.anbang.com.anbang_app.config.GatewayProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "ca.allow-all-host-names",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.anbang.com.anbang_app.config.CAClientProperties",
+      "defaultValue": false
+    },
+    {
+      "name": "ca.ca-name1",
+      "type": "java.lang.String",
+      "sourceType": "org.anbang.com.anbang_app.config.CAClientProperties"
+    },
+    {
+      "name": "ca.ca-name2",
+      "type": "java.lang.String",
+      "sourceType": "org.anbang.com.anbang_app.config.CAClientProperties"
+    },
+    {
+      "name": "ca.ca-url1",
+      "type": "java.lang.String",
+      "sourceType": "org.anbang.com.anbang_app.config.CAClientProperties"
+    },
+    {
+      "name": "ca.ca-url2",
+      "type": "java.lang.String",
+      "sourceType": "org.anbang.com.anbang_app.config.CAClientProperties"
+    },
+    {
+      "name": "ca.pem-file1",
+      "type": "java.lang.String",
+      "sourceType": "org.anbang.com.anbang_app.config.CAClientProperties"
+    },
+    {
+      "name": "ca.pem-file2",
+      "type": "java.lang.String",
+      "sourceType": "org.anbang.com.anbang_app.config.CAClientProperties"
+    },
+    {
+      "name": "gateway.discovery",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.anbang.com.anbang_app.config.GatewayProperties"
+    },
+    {
+      "name": "gateway.network-config",
+      "type": "java.lang.String",
+      "sourceType": "org.anbang.com.anbang_app.config.GatewayProperties"
+    },
+    {
+      "name": "gateway.wallet-name",
+      "type": "java.lang.String",
+      "sourceType": "org.anbang.com.anbang_app.config.GatewayProperties"
+    },
+    {
+      "name": "gateway.wallet-url",
+      "type": "java.lang.String",
+      "sourceType": "org.anbang.com.anbang_app.config.GatewayProperties"
+    }
+  ],
+  "hints": []
+}
