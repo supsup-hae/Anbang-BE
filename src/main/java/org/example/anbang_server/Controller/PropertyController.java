@@ -29,37 +29,37 @@ public class PropertyController {
 
   @PostMapping("/create")
   public ResponseEntity<String> createRealEstate(@RequestBody RealEstateDto realEstateDto) {
-    return propertyService.createRealEstate(context, realEstateDto);
+    return propertyService.createRealEstate(realEstateDto);
   }
 
   @GetMapping("/search")
   public ResponseEntity<String> searchRealEstate(@RequestBody RealEstateDto realEstateDto) {
-    return propertyService.searchRealEstate(context, realEstateDto.getHomeID());
+    return propertyService.searchRealEstate(realEstateDto.getHomeID());
   }
 
   @PostMapping("/update")
   public ResponseEntity<String> updateRealEstate(@RequestBody RealEstateDto realEstateDto) {
-    return propertyService.updateRealEstate(context, realEstateDto);
+    return propertyService.updateRealEstate(realEstateDto);
   }
 
   @PostMapping("/transfer")
   public ResponseEntity<String> transferRealEstate(@RequestBody RealEstateDto realEstateDto) {
-    return propertyService.transferRealEstate(context, realEstateDto.getHomeID(), realEstateDto.getOwner());
+    return propertyService.transferRealEstate(realEstateDto.getHomeID(), realEstateDto.getOwner());
   }
 
   @GetMapping("/delete")
   public ResponseEntity<String> deleteRealEstate(@RequestBody RealEstateDto realEstateDto) {
-    return propertyService.deleteRealEstate(context, realEstateDto.getHomeID());
+    return propertyService.deleteRealEstate(realEstateDto.getHomeID());
   }
 
   @GetMapping("/exists")
   public ResponseEntity<String> realEstateExists(@RequestBody RealEstateDto realEstateDto) {
-    return propertyService.realEstateExists(context, realEstateDto.getHomeID());
+    return propertyService.realEstateExists(realEstateDto.getHomeID());
   }
 
   @GetMapping("/query-all")
-  public ResponseEntity<String> queryAllRealEstate(TransactionContext ctx) {
-    return propertyService.queryAllRealEstate(ctx);
+  public ResponseEntity<String> queryAllRealEstate() {
+    return propertyService.queryAllRealEstate();
   }
 
   @GetMapping("/build")
@@ -76,7 +76,7 @@ public class PropertyController {
 
   @PostMapping("/enroll")
   public ResponseEntity<String> enrollClient(@RequestBody UserDto userDto) {
-    return propertyService.enrollClient(userDto.getId());
+    return propertyService.enrollClient(userDto.getUuid());
   }
 
 }

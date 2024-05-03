@@ -16,4 +16,5 @@ public class User {
   private String accountBank;
   private String accountNumber;
   private String postNumber;
+  private String uuid;
 }

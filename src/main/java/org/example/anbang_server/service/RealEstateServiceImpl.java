@@ -19,9 +19,10 @@ public class RealEstateServiceImpl implements RealEstateService {
   private final static String DEPLOY_CC_CMD = "sh src/main/resources/script/CC.sh";
 
   private final static AnbangRealEstateTransfer TRANSFER = new AnbangRealEstateTransfer();
+  private TransactionContext ctx;
 
   @Override
-  public ResponseEntity<String> createRealEstate(TransactionContext ctx, RealEstateDto realEstateDto) {
+  public ResponseEntity<String> createRealEstate(RealEstateDto realEstateDto) {
     try {
       TRANSFER.createAnbangRealEstate(ctx, realEstateDto.getHomeID(), realEstateDto.getOwner(),
           realEstateDto.getAddress(),
@@ -35,7 +36,7 @@ public class RealEstateServiceImpl implements RealEstateService {
 
 
   @Override
-  public ResponseEntity<String> searchRealEstate(TransactionContext ctx, String homeID) {
+  public ResponseEntity<String> searchRealEstate(String homeID) {
     try {
       return new ResponseEntity(TRANSFER.readAnbangRealEstate(ctx, homeID), HttpStatus.OK);
     } catch (ChaincodeException e) {
@@ -45,7 +46,7 @@ public class RealEstateServiceImpl implements RealEstateService {
   }
 
   @Override
-  public ResponseEntity<String> updateRealEstate(TransactionContext ctx, RealEstateDto realEstateDto) {
+  public ResponseEntity<String> updateRealEstate(RealEstateDto realEstateDto) {
     try {
       return new ResponseEntity<>(
           TRANSFER.updateAnbangRealEstate(ctx, realEstateDto.getHomeID(), realEstateDto.getOwner(),
@@ -57,7 +58,7 @@ public class RealEstateServiceImpl implements RealEstateService {
   }
 
   @Override
-  public ResponseEntity<String> transferRealEstate(TransactionContext ctx, String homeID,
+  public ResponseEntity<String> transferRealEstate(String homeID,
       String newOwner) {
     try {
       return new ResponseEntity<>(TRANSFER.transferAnbangRealEstate(ctx, homeID, newOwner),
@@ -69,7 +70,7 @@ public class RealEstateServiceImpl implements RealEstateService {
   }
 
   @Override
-  public ResponseEntity<String> deleteRealEstate(TransactionContext ctx, String homeID) {
+  public ResponseEntity<String> deleteRealEstate(String homeID) {
     try {
       TRANSFER.deleteAnbangRealEstate(ctx, homeID);
       return new ResponseEntity<>("매물 삭제 완료", HttpStatus.OK);
@@ -80,7 +81,7 @@ public class RealEstateServiceImpl implements RealEstateService {
   }
 
   @Override
-  public ResponseEntity<String> queryAllRealEstate(TransactionContext ctx) {
+  public ResponseEntity<String> queryAllRealEstate() {
     try {
       return new ResponseEntity<>(TRANSFER.queryAllAnbangRealEstate(ctx), HttpStatus.OK);
     } catch (Exception e) {
@@ -90,7 +91,7 @@ public class RealEstateServiceImpl implements RealEstateService {
   }
 
   @Override
-  public ResponseEntity<String> realEstateExists(TransactionContext ctx, String homeID) {
+  public ResponseEntity<String> realEstateExists(String homeID) {
     try {
       if (TRANSFER.anbangRealEstateExists(ctx, homeID)) {
         return new ResponseEntity<>("매물이 존재합니다!", HttpStatus.OK);
@@ -114,9 +115,9 @@ public class RealEstateServiceImpl implements RealEstateService {
   }
 
   @Override
-  public ResponseEntity<String> enrollClient(String userId) {
-    if (userId != null) {
-      log.info("userId = " + userId);
+  public ResponseEntity<String> enrollClient(String uuid) {
+    if (uuid != null) {
+      log.info("uuid = " + uuid);
       new ResponseEntity<>("Id 값 반환에 성공했습니다!", HttpStatus.OK);
     } else {
       new ResponseEntity<>("Id 값 반환에 실패했습니다", HttpStatus.BAD_REQUEST);

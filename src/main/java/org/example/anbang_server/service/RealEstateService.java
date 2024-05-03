@@ -1,24 +1,23 @@
 package org.example.anbang_server.service;
 
 import org.example.anbang_server.dto.RealEstateDto;
-import org.example.anbang_server.model.TransactionContext;
 import org.springframework.http.ResponseEntity;
 
 public interface RealEstateService {
 
-  ResponseEntity<String> realEstateExists(TransactionContext ctx, String homeID);
+  ResponseEntity<String> realEstateExists(String homeID);
 
-  ResponseEntity<String> createRealEstate(TransactionContext ctx, RealEstateDto realEstateDto);
+  ResponseEntity<String> createRealEstate(RealEstateDto realEstateDto);
 
-  ResponseEntity<String> searchRealEstate(TransactionContext ctx, String homeID);
+  ResponseEntity<String> searchRealEstate(String homeID);
 
-  ResponseEntity<String> updateRealEstate(TransactionContext ctx, RealEstateDto realEstateDto);
+  ResponseEntity<String> updateRealEstate(RealEstateDto realEstateDto);
 
-  ResponseEntity<String> transferRealEstate(TransactionContext ctx, String homeID, String newOwner);
+  ResponseEntity<String> transferRealEstate(String homeID, String newOwner);
 
-  ResponseEntity<String> deleteRealEstate(TransactionContext ctx, String homeID);
+  ResponseEntity<String> deleteRealEstate(String homeID);
 
-  ResponseEntity<String> queryAllRealEstate(TransactionContext ctx);
+  ResponseEntity<String> queryAllRealEstate();
 
   void buildChannelCA();
 

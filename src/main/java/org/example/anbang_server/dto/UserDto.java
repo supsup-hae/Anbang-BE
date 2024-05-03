@@ -20,4 +20,5 @@ public class UserDto {
   private String accountBank;
   private String accountNumber;
   private String postNumber;
+  private String uuid;
 }
