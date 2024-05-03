@@ -50,7 +50,7 @@ public class AnbangRealEstateTransfer implements ContractInterface {
         return (realtyJson != null && !realtyJson.isEmpty());
     }
     @Transaction(intent = Transaction.TYPE.SUBMIT)
-    public final AnbangRealEstate createAnbangRealEstate(final Context ctx, final String homeID, final String owner, final String address, final long price) {
+    public final AnbangRealEstate createAnbangRealEstate(final Context ctx, final String homeID, final String owner, final String address, final String price) {
         ChaincodeStub stub = ctx.getStub();
 
         if (anbangRealEstateExists(ctx, homeID)) {
@@ -83,7 +83,7 @@ public class AnbangRealEstateTransfer implements ContractInterface {
     }
 
     @Transaction(intent = Transaction.TYPE.SUBMIT)
-    public final AnbangRealEstate updateAnbangRealEstate(final Context ctx, final String homeID, final String owner, final String address, final long price) {
+    public final AnbangRealEstate updateAnbangRealEstate(final Context ctx, final String homeID, final String owner, final String address, final String price) {
         ChaincodeStub stub = ctx.getStub();
 
         if (!anbangRealEstateExists(ctx, homeID)) {

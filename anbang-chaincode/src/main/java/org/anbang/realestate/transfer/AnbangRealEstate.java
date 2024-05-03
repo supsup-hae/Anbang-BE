@@ -19,10 +19,10 @@ public final class AnbangRealEstate {
     @Property
     private final String address;
     @Property
-    private final long price;
+    private final String price;
 
 
-    public AnbangRealEstate(@JsonProperty("homeID") final String homeID, @JsonProperty("owner") final String owner, @JsonProperty("address") final String address, @JsonProperty("price") final long price) {
+    public AnbangRealEstate(@JsonProperty("homeID") final String homeID, @JsonProperty("owner") final String owner, @JsonProperty("address") final String address, @JsonProperty("price") final String price) {
         this.homeID = homeID;
         this.owner = owner;
         this.address = address;
@@ -40,12 +40,8 @@ public final class AnbangRealEstate {
         AnbangRealEstate anbangRealEState = (AnbangRealEstate) obj;
 
         return Objects.deepEquals(
-                new String[] {getHomeID(), getOwner(), getAddress()},
-                new String[] {anbangRealEState.getHomeID(), anbangRealEState.getOwner(), anbangRealEState.getAddress()})
-                &&
-                Objects.deepEquals(
-                        new long[] {getPrice()},
-                        new long[] {anbangRealEState.getPrice()});
+                new String[] {getHomeID(), getOwner(), getAddress(), getPrice()},
+                new String[] {anbangRealEState.getHomeID(), anbangRealEState.getOwner(), anbangRealEState.getAddress(), anbangRealEState.getPrice()});
     }
 
     @Override

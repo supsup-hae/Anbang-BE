@@ -57,13 +57,13 @@ final class AnbangRealEstateTransferTest {
             realtyList = new ArrayList<KeyValue>();
 
             realtyList.add(new MockKeyValue("home1",
-                    "{\"homeID\":\"home1\",\"owner\":\"owner1\",\"address\":\"address1\",\"price\":1000}" ));
+                    "{\"homeID\":\"home1\",\"owner\":\"owner1\",\"address\":\"address1\",\"price\":\"1000\"}" ));
             realtyList.add(new MockKeyValue("home2",
-                    "{\"homeID\":\"home2\",\"owner\":\"owner2\",\"address\":\"address2\",\"price\":2000}" ));
+                    "{\"homeID\":\"home2\",\"owner\":\"owner2\",\"address\":\"address2\",\"price\":\"2000\"}" ));
             realtyList.add(new MockKeyValue("home3",
-                    "{\"homeID\":\"home3\",\"owner\":\"owner3\",\"address\":\"address3\",\"price\":3000}" ));
+                    "{\"homeID\":\"home3\",\"owner\":\"owner3\",\"address\":\"address3\",\"price\":\"3000\"}" ));
             realtyList.add(new MockKeyValue("home4",
-                    "{\"homeID\":\"home4\",\"owner\":\"owner4\",\"address\":\"address4\",\"price\":4000}" ));
+                    "{\"homeID\":\"home4\",\"owner\":\"owner4\",\"address\":\"address4\",\"price\":\"4000\"}" ));
 
         }
 
@@ -101,10 +101,10 @@ final class AnbangRealEstateTransferTest {
             ChaincodeStub stub = mock(ChaincodeStub.class);
             when(ctx.getStub()).thenReturn(stub);
             when(stub.getStringState("home1" ))
-                    .thenReturn("{\"homeID\":\"home1\",\"owner\":\"owner1\",\"address\":\"address1\",\"price\":1000}" );
+                    .thenReturn("{\"homeID\":\"home1\",\"owner\":\"owner1\",\"address\":\"address1\",\"price\":\"1000\"}" );
 
             Throwable thrown = catchThrowable(() -> {
-                contract.createAnbangRealEstate(ctx, "home1", "owner2", "address2", 2000);
+                contract.createAnbangRealEstate(ctx, "home1", "owner2", "address2", "2000");
             });
 
             assertThat(thrown).isInstanceOf(ChaincodeException.class).hasNoCause().hasMessage("home1은 이미 존재하는 매물입니다." );
@@ -119,9 +119,9 @@ final class AnbangRealEstateTransferTest {
             when(ctx.getStub()).thenReturn(stub);
             when(stub.getStringState("home1" )).thenReturn("" );
 
-            AnbangRealEstate anbangRealEstate = contract.createAnbangRealEstate(ctx, "home1", "owner1", "address1", 1000);
+            AnbangRealEstate anbangRealEstate = contract.createAnbangRealEstate(ctx, "home1", "owner1", "address1", "1000");
 
-            assertThat(anbangRealEstate).isEqualTo(new AnbangRealEstate("home1", "owner1", "address1", 1000));
+            assertThat(anbangRealEstate).isEqualTo(new AnbangRealEstate("home1", "owner1", "address1", "1000"));
         }
     }
     @Nested
@@ -133,11 +133,11 @@ final class AnbangRealEstateTransferTest {
             ChaincodeStub stub = mock(ChaincodeStub.class);
             when(ctx.getStub()).thenReturn(stub);
             when(stub.getStringState("home1" ))
-                    .thenReturn("{\"homeID\":\"home1\",\"owner\":\"owner1\",\"address\":\"address1\",\"price\":1000}" );
+                    .thenReturn("{\"homeID\":\"home1\",\"owner\":\"owner1\",\"address\":\"address1\",\"price\":\"1000\"}" );
 
             AnbangRealEstate anbangRealEstate = contract.readAnbangRealEstate(ctx, "home1");
 
-            assertThat(anbangRealEstate).isEqualTo(new AnbangRealEstate("home1", "owner1", "address1", 1000));
+            assertThat(anbangRealEstate).isEqualTo(new AnbangRealEstate("home1", "owner1", "address1", "1000"));
         }
 
         @Test
@@ -165,11 +165,11 @@ final class AnbangRealEstateTransferTest {
             ChaincodeStub stub = mock(ChaincodeStub.class);
             when(ctx.getStub()).thenReturn(stub);
             when(stub.getStringState("home1" ))
-                    .thenReturn("{\"homeID\":\"home1\",\"owner\":\"owner1\",\"address\":\"address1\",\"price\":1000}" );
+                    .thenReturn("{\"homeID\":\"home1\",\"owner\":\"owner1\",\"address\":\"address1\",\"price\":\"1000\"}" );
 
-            AnbangRealEstate anbangRealEstate = contract.updateAnbangRealEstate(ctx, "home1", "owner2", "address2", 2000);
+            AnbangRealEstate anbangRealEstate = contract.updateAnbangRealEstate(ctx, "home1", "owner2", "address2", "2000");
 
-            assertThat(anbangRealEstate).isEqualTo(new AnbangRealEstate("home1", "owner2", "address2", 2000));
+            assertThat(anbangRealEstate).isEqualTo(new AnbangRealEstate("home1", "owner2", "address2", "2000"));
         }
 
         @Test
@@ -181,7 +181,7 @@ final class AnbangRealEstateTransferTest {
             when(stub.getStringState("home1" )).thenReturn("" );
 
             Throwable thrown = catchThrowable(() -> {
-                contract.updateAnbangRealEstate(ctx, "home1", "owner1", "address1", 1000);
+                contract.updateAnbangRealEstate(ctx, "home1", "owner1", "address1", "1000");
             });
 
             assertThat(thrown).isInstanceOf(ChaincodeException.class).hasNoCause().hasMessage("home1은 존재하지 않는 매물입니다." );
@@ -197,7 +197,7 @@ final class AnbangRealEstateTransferTest {
             ChaincodeStub stub = mock(ChaincodeStub.class);
             when(ctx.getStub()).thenReturn(stub);
             when(stub.getStringState("home1" ))
-                    .thenReturn("{\"homeID\":\"home1\",\"owner\":\"owner1\",\"address\":\"address1\",\"price\":1000}" );
+                    .thenReturn("{\"homeID\":\"home1\",\"owner\":\"owner1\",\"address\":\"address1\",\"price\":\"1000\"}" );
 
             String newOwner = contract.transferAnbangRealEstate(ctx, "home1", "owner2");
             assertThat(newOwner).isEqualTo("owner2");
@@ -229,10 +229,10 @@ final class AnbangRealEstateTransferTest {
 
         String realty = contract.queryAllAnbangRealEstate(ctx);
 
-        assertThat(realty).isEqualTo("[{\"address\":\"address1\",\"homeID\":\"home1\",\"owner\":\"owner1\",\"price\":1000}," +
-                "{\"address\":\"address2\",\"homeID\":\"home2\",\"owner\":\"owner2\",\"price\":2000}," +
-                "{\"address\":\"address3\",\"homeID\":\"home3\",\"owner\":\"owner3\",\"price\":3000}," +
-                "{\"address\":\"address4\",\"homeID\":\"home4\",\"owner\":\"owner4\",\"price\":4000}]");
+        assertThat(realty).isEqualTo("[{\"address\":\"address1\",\"homeID\":\"home1\",\"owner\":\"owner1\",\"price\":\"1000\"}," +
+                "{\"address\":\"address2\",\"homeID\":\"home2\",\"owner\":\"owner2\",\"price\":\"2000\"}," +
+                "{\"address\":\"address3\",\"homeID\":\"home3\",\"owner\":\"owner3\",\"price\":\"3000\"}," +
+                "{\"address\":\"address4\",\"homeID\":\"home4\",\"owner\":\"owner4\",\"price\":\"4000\"}]");
     }
     @Nested
     class DeleteAssetTransaction {
