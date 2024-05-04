@@ -23,33 +23,30 @@ public class GatewayServiceImpl implements GateWayService {
     this.gatewayProperties = gatewayProperties;
   }
 
-  public Gateway connectToGateway(String userId) throws Exception {
+  @Override
+  public ResponseEntity<String> createAnbangRealEstate(String userId, String homeId, String owner, String address, String price) {
+    try (Gateway gateway = connectToGateway(userId)) {
+      Network network = gateway.getNetwork(gatewayProperties.getChannelName());
+      Contract contract = network.getContract(gatewayProperties.getChaincodeName());
+
+      byte[] createAnbangRealEstates = contract.submitTransaction("createAnbangRealEstate", homeId, owner, address, price);
+
+      return new ResponseEntity<>("매물 생성 완료", HttpStatus.CREATED);
+    } catch (Exception e) {
+      e.printStackTrace();
+
+      return new ResponseEntity<>("매물 생성 실패", HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  private Gateway connectToGateway(String userId) throws Exception {
     Gateway.Builder builder = Gateway.createBuilder();
     builder
-        .identity(gatewayConfiguration.wallet(), userId)
-        .networkConfig(gatewayProperties.getNetworkConfig())
-        .discovery(gatewayProperties.isDiscovery());
+            .identity(gatewayConfiguration.wallet(), userId)
+            .networkConfig(gatewayProperties.getNetworkConfigOrg1())
+            .discovery(gatewayProperties.isDiscovery());
 
     return builder.connect();
   }
 
-  public Network network(String userId) throws Exception {
-    return connectToGateway(userId).getNetwork(gatewayProperties.getChannelName());
-  }
-
-  public Contract contract(String userId) throws Exception {
-    return network(userId).getContract(gatewayProperties.getChaincodeName());
-  }
-
-  public ResponseEntity<String> createAnbangRealEstate(String userId, String homeId, String owner, String address, String price) {
-
-    try (Gateway gateway = connectToGateway(userId)) {
-      Contract contract = contract(userId);
-      byte[] response = contract.submitTransaction("createAnbangRealEstate", homeId, owner, address, price);
-      return new ResponseEntity<>("매물 생성 완료", HttpStatus.CREATED);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return new ResponseEntity<>("매물 생성 실패", HttpStatus.BAD_REQUEST);
-  }
 }
