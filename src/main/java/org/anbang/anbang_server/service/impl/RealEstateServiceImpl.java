@@ -19,6 +19,9 @@ public class RealEstateServiceImpl implements RealEstateService {
   private final static String BUILD_CA_CMD = "sh src/main/resources/script/SC.sh";
   private final static String DEPLOY_CC_CMD = "sh src/main/resources/script/CC.sh";
 
+  private final static String CREATE_COC_CMD = "sh src/main/resources/script/COC.sh";
+
+
   private final static AnbangRealEstateTransfer TRANSFER = new AnbangRealEstateTransfer();
   private Context ctx;
 
@@ -37,8 +40,8 @@ public class RealEstateServiceImpl implements RealEstateService {
   public ResponseEntity<String> updateRealEstate(RealEstateDto realEstateDto) {
     try {
       return new ResponseEntity<>(
-          TRANSFER.updateAnbangRealEstate(ctx, realEstateDto.getHomeID(), realEstateDto.getOwner(),
-              realEstateDto.getHomeID(), Long.parseLong(realEstateDto.getPrice())).toString(), HttpStatus.OK);
+          TRANSFER.updateAnbangRealEstate(ctx, realEstateDto.getHomeId(), realEstateDto.getOwner(),
+              realEstateDto.getHomeId(), Long.parseLong(realEstateDto.getPrice())).toString(), HttpStatus.OK);
     } catch (ChaincodeException e) {
       e.printStackTrace();
       return new ResponseEntity<>("매물 업데이트 실패", HttpStatus.BAD_REQUEST);
@@ -100,6 +103,11 @@ public class RealEstateServiceImpl implements RealEstateService {
   @Override
   public void deployChainCode() {
     ShellRunner.execCommand(DEPLOY_CC_CMD);
+  }
+
+  @Override
+  public void createNetworkConnection() {
+    ShellRunner.execCommand(CREATE_COC_CMD);
   }
 
 

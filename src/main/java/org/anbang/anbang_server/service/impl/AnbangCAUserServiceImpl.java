@@ -29,7 +29,7 @@ public class AnbangCAUserServiceImpl implements AnbangCAUserService {
   private static final String SELLER = "seller";
 
   @Autowired
-  public AnbangCAUserServiceImpl(CAClientConfiguration caClient, GatewayConfiguration gatewayConfiguration, GatewayProperties gatewayProperties){
+  public AnbangCAUserServiceImpl(CAClientConfiguration caClient, GatewayConfiguration gatewayConfiguration, GatewayProperties gatewayProperties) {
     this.caClient = caClient;
     this.gatewayConfiguration = gatewayConfiguration;
     this.gatewayProperties = gatewayProperties;
@@ -39,7 +39,7 @@ public class AnbangCAUserServiceImpl implements AnbangCAUserService {
   public ResponseEntity<String> enrollAdmin(String adminId, String adminPw, String affiliation) throws Exception {
 
     if (userExists(adminId)) {
-      return new ResponseEntity<>("이미 등록된 관리자입니다.", HttpStatus.OK);
+      return new ResponseEntity<>("이미 등록된 관리자입니다.", HttpStatus.BAD_REQUEST);
     }
 
     final EnrollmentRequest enrollmentRequest = new EnrollmentRequest();
@@ -47,7 +47,7 @@ public class AnbangCAUserServiceImpl implements AnbangCAUserService {
 
     String orgMSPId = getOrgMspId(affiliation);
     if (orgMSPId == null) {
-      return new ResponseEntity<>("OrgMSPId를 찾을 수 없습니다.", HttpStatus.OK);
+      return new ResponseEntity<>("OrgMSPId를 찾을 수 없습니다.", HttpStatus.BAD_REQUEST);
     }
     switch (affiliation) {
       case BUYER:
@@ -67,25 +67,25 @@ public class AnbangCAUserServiceImpl implements AnbangCAUserService {
         return new ResponseEntity<>("org2 관리자 등록 완료", HttpStatus.OK);
 
       default:
-        return new ResponseEntity<>("관리자 등록 실패", HttpStatus.OK);
+        return new ResponseEntity<>("관리자 등록 실패", HttpStatus.BAD_REQUEST);
     }
   }
 
   @Override
-  public ResponseEntity<String> registerUser(String userId, String affiliation,String adminId) throws Exception {
+  public ResponseEntity<String> registerUser(String userId, String affiliation, String adminId) throws Exception {
 
     if (userExists(userId)) {
-      return new ResponseEntity<>("이미 등록된 유저입니다.", HttpStatus.OK);
+      return new ResponseEntity<>("이미 등록된 유저입니다.", HttpStatus.BAD_REQUEST);
     }
 
     X509Identity adminIdentity = (X509Identity) gatewayConfiguration.wallet().get(adminId);
     if (adminIdentity == null) {
-      return new ResponseEntity<>("관리자가 등록되지 않았습니다.", HttpStatus.OK);
+      return new ResponseEntity<>("관리자가 등록되지 않았습니다.", HttpStatus.BAD_REQUEST);
     }
 
     String orgMSPId = getOrgMspId(affiliation);
     if (orgMSPId == null) {
-      return new ResponseEntity<>("OrgMSPId를 찾을 수 없습니다.", HttpStatus.OK);
+      return new ResponseEntity<>("OrgMSPId를 찾을 수 없습니다.", HttpStatus.NOT_FOUND);
     }
 
     CAUserConfiguration admin = CAUserConfiguration.builder()
@@ -121,6 +121,7 @@ public class AnbangCAUserServiceImpl implements AnbangCAUserService {
         return new ResponseEntity<>("유저 등록 실패", HttpStatus.NOT_FOUND);
     }
   }
+
   public Boolean userExists(String userId) throws IOException {
     return gatewayConfiguration.wallet().get(userId) != null;
   }

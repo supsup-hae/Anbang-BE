@@ -20,4 +20,6 @@ public interface RealEstateService {
   void buildChannelCA();
 
   void deployChainCode();
+
+  void createNetworkConnection();
 }
