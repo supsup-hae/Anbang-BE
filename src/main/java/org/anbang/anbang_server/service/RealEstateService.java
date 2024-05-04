@@ -1,13 +1,11 @@
-package org.example.anbang_server.service;
+package org.anbang.anbang_server.service;
 
-import org.example.anbang_server.dto.RealEstateDto;
+import org.anbang.anbang_server.dto.RealEstateDto;
 import org.springframework.http.ResponseEntity;
 
 public interface RealEstateService {
 
   ResponseEntity<String> realEstateExists(String homeID);
-
-  ResponseEntity<String> createRealEstate(RealEstateDto realEstateDto);
 
   ResponseEntity<String> searchRealEstate(String homeID);
 
@@ -22,6 +20,4 @@ public interface RealEstateService {
   void buildChannelCA();
 
   void deployChainCode();
-
-  ResponseEntity<String> enrollClient(String userId);
 }

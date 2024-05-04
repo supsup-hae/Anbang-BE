@@ -1,4 +1,4 @@
-package org.example.anbang_server;
+package org.anbang.anbang_server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

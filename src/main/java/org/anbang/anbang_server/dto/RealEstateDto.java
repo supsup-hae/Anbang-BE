@@ -1,4 +1,4 @@
-package org.example.anbang_server.model;
+package org.anbang.anbang_server.dto;
 
 import lombok.Data;
 import lombok.Getter;
@@ -7,11 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @Getter
 @NoArgsConstructor
-public class RealEstate {
-
+public class RealEstateDto {
+  private String userID;
   private String homeID;
   private String owner;
   private String address;
-  private long price;
-
+  private String price;
 }

@@ -1,11 +1,15 @@
-package org.example.anbang_server.model;
+package org.anbang.anbang_server.dto;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-@Data
 @NoArgsConstructor
-public class User {
+@Data
+@Getter
+@ToString
+public class UserDto {
 
   private String id;
   private String password;

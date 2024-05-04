@@ -4,7 +4,7 @@ plugins {
     id 'io.spring.dependency-management' version '1.1.4'
 }
 
-group = 'org.example'
+group = 'org.anbang.com'
 version = '0.0.1-SNAPSHOT'
 
 java {
@@ -26,13 +26,14 @@ repositories {
 
 dependencies {
     //hyperledger
-    implementation 'org.hyperledger.fabric-chaincode-java:fabric-chaincode-shim:2.5.1'
+    implementation 'org.hyperledger.fabric:fabric-gateway-java:2.2.1'
 
     implementation files('build/libs/anbang-chaincode-1.0-SNAPSHOT.jar')
     implementation files('build/libs/anbang-chaincode.jar')
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 

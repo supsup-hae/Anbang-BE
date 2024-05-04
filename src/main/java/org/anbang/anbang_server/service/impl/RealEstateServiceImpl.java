@@ -1,11 +1,12 @@
-package org.example.anbang_server.service;
+package org.anbang.anbang_server.service.impl;
 
 
-import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
+import org.anbang.anbang_server.dto.RealEstateDto;
+import org.anbang.anbang_server.service.RealEstateService;
+import org.anbang.anbang_server.service.ShellRunner;
 import org.anbang.realestate.transfer.AnbangRealEstateTransfer;
-import org.example.anbang_server.dto.RealEstateDto;
-import org.example.anbang_server.model.TransactionContext;
+import org.hyperledger.fabric.contract.Context;
 import org.hyperledger.fabric.shim.ChaincodeException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,20 +20,7 @@ public class RealEstateServiceImpl implements RealEstateService {
   private final static String DEPLOY_CC_CMD = "sh src/main/resources/script/CC.sh";
 
   private final static AnbangRealEstateTransfer TRANSFER = new AnbangRealEstateTransfer();
-  private TransactionContext ctx;
-
-  @Override
-  public ResponseEntity<String> createRealEstate(RealEstateDto realEstateDto) {
-    try {
-      TRANSFER.createAnbangRealEstate(ctx, realEstateDto.getHomeID(), realEstateDto.getOwner(),
-          realEstateDto.getAddress(),
-          realEstateDto.getPrice());
-      return new ResponseEntity<>(String.valueOf(UUID.randomUUID()), HttpStatus.OK);
-    } catch (ChaincodeException e) {
-      e.printStackTrace();
-      return new ResponseEntity<>("매물 생성 실패", HttpStatus.BAD_REQUEST);
-    }
-  }
+  private Context ctx;
 
 
   @Override
@@ -50,7 +38,7 @@ public class RealEstateServiceImpl implements RealEstateService {
     try {
       return new ResponseEntity<>(
           TRANSFER.updateAnbangRealEstate(ctx, realEstateDto.getHomeID(), realEstateDto.getOwner(),
-              realEstateDto.getHomeID(), realEstateDto.getPrice()).toString(), HttpStatus.OK);
+              realEstateDto.getHomeID(), Long.parseLong(realEstateDto.getPrice())).toString(), HttpStatus.OK);
     } catch (ChaincodeException e) {
       e.printStackTrace();
       return new ResponseEntity<>("매물 업데이트 실패", HttpStatus.BAD_REQUEST);
@@ -114,15 +102,5 @@ public class RealEstateServiceImpl implements RealEstateService {
     ShellRunner.execCommand(DEPLOY_CC_CMD);
   }
 
-  @Override
-  public ResponseEntity<String> enrollClient(String uuid) {
-    if (uuid != null) {
-      log.info("uuid = " + uuid);
-      new ResponseEntity<>("Id 값 반환에 성공했습니다!", HttpStatus.OK);
-    } else {
-      new ResponseEntity<>("Id 값 반환에 실패했습니다", HttpStatus.BAD_REQUEST);
-    }
-    return null;
-  }
 
 }
