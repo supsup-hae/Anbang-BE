@@ -43,7 +43,7 @@ public class GatewayServiceImpl implements GateWayService {
     Gateway.Builder builder = Gateway.createBuilder();
     builder
             .identity(gatewayConfiguration.wallet(), userId)
-            .networkConfig(gatewayProperties.getNetworkConfigOrg1())
+            .networkConfig(gatewayProperties.getNetworkConfigOrg1().getInputStream())
             .discovery(gatewayProperties.isDiscovery());
 
     return builder.connect();
