@@ -139,6 +139,7 @@ function checkCommitReadyness2() {
 
 #체인 코드 정의
 function commitChaincodeDefination() {
+    setGlobalsForPeer0Org1
     peer lifecycle chaincode commit -o localhost:7050 --ordererTLSHostnameOverride orderer.anbang.com \
         --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA \
         --channelID $CHANNEL_NAME --name ${CC_NAME} \

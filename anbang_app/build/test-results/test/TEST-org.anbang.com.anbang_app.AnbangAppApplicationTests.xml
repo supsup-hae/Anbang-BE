@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.anbang.com.anbang_app.AnbangAppApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-05-03T17:50:23" hostname="idongjaeui-MacBookPro.local" time="0.4">
+  <properties/>
+  <testcase name="contextLoads()" classname="org.anbang.com.anbang_app.AnbangAppApplicationTests" time="0.4"/>
+  <system-out><![CDATA[02:50:22.281 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [org.anbang.com.anbang_app.AnbangAppApplicationTests]: AnbangAppApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+02:50:22.328 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration org.anbang.com.anbang_app.AnbangAppApplication for test class org.anbang.com.anbang_app.AnbangAppApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.5)
+
+2024-05-04T02:50:22.496+09:00  INFO 9231 --- [anbang_app] [    Test worker] o.a.c.a.AnbangAppApplicationTests        : Starting AnbangAppApplicationTests using Java 17.0.10 with PID 9231 (started by idongjae in /Users/idongjae/anbang_app)
+2024-05-04T02:50:22.497+09:00  INFO 9231 --- [anbang_app] [    Test worker] o.a.c.a.AnbangAppApplicationTests        : No active profile set, falling back to 1 default profile: "default"
+2024-05-04T02:50:22.701+09:00  WARN 9231 --- [anbang_app] [    Test worker] o.hyperledger.fabric.sdk.helper.Config   : Failed to load any configuration from: config.properties. Using toolkit defaults
+2024-05-04T02:50:23.065+09:00  WARN 9231 --- [anbang_app] [    Test worker] o.h.fabric_ca.sdk.helper.Config          : Failed to load any configuration from: config.properties. Using toolkit defaults
+2024-05-04T02:50:23.125+09:00  INFO 9231 --- [anbang_app] [    Test worker] o.a.c.a.AnbangAppApplicationTests        : Started AnbangAppApplicationTests in 0.73 seconds (process running for 1.233)
+ca1
+ca2
+http://localhost:7054
+http://localhost:7055
+ca1.pem
+ca2.pem
+true
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
