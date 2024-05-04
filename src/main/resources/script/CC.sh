@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 체인코드 배포 스크립트가 있는 폴더로 이동
-~/hyperledger-fabric/anbang-network
+cd ~/hyperledger-fabric/anbang-network
 
 echo 체인코드 설치를 위한 준비
 ./deployCC.sh setup
