@@ -5,11 +5,11 @@ function one_line_pem {
 }
 
 function json_cco {
-    local PP=$(one_line_pem $4)
-    local CP=$(one_line_pem $5)
+    local PP=$(one_line_pem $5)
+    local CP=$(one_line_pem $6)
     sed -e "s/\${ORG}/$1/" \
-        -e "s/\${POPORT1}/$2/" \
-        -e "s/\${POPORT2}/$3/" \
+        -e "s/\${P0PORT}/$2/" \
+        -e "s/\${P1PORT}/$3/" \
         -e "s/\${CAPORT}/$4/" \
         -e "s#\${PEERPEM}#$PP#" \
         -e "s#\${CAPEM}#$CP#" \
@@ -17,19 +17,19 @@ function json_cco {
 }
 
 ORG=1
-POPORT1=7051
-POPORT2=8051
+P0PORT=7051
+P1PORT=8051
 CAPORT=7054
-PEERPEM=:~/hyperledger-fabric/anbang-network/channel/crypto-config/peerOrganizations/org1.anbang.com/peers/peer0.org1.anbang.com/msp/tlscacerts/tlsca.org1.anbang.com-cert.pem
-CAPEM=~/hyperledger-fabric/anbang-network/channel/crypto-config/peerOrganizations/org1.anbang.com/msp/tlscacerts/tlsca.org1.anbang.com-cert.pem
+PEERPEM=/Users/idongjae/anbang-server/anbang-network/channel/crypto-config/peerOrganizations/org1.anbang.com/peers/peer0.org1.anbang.com/msp/tlscacerts/tlsca.org1.anbang.com-cert.pem
+CAPEM=/Users/idongjae/anbang-server/anbang-network/channel/crypto-config/peerOrganizations/org1.anbang.com/peers/peer0.org1.anbang.com/msp/tlscacerts/tlsca.org1.anbang.com-cert.pem
 
-"$(json_cco $ORG $POPORT1 $POPORT2 $CAPORT $PEERPEM $CAPEM )" > ../json/connection-org1.json
+echo "$(json_cco $ORG $P0PORT $P1PORT $CAPORT $PEERPEM $CAPEM )" > ../json/connection-org1.json
 
 ORG=2
-POPORT1=9051
-POPORT2=10051
+P0PORT=9051
+P1PORT=10051
 CAPORT=8054
-PEERPEM=~/hyperledger-fabric/anbang-network/channel/crypto-config/peerOrganizations/org2.anbang.com/peers/peer0.org2.anbang.com/msp/tlscacerts/tlsca.org2.anbang.com-cert.pem
-CAPEM=~/hyperledger-fabric/anbang-network/channel/crypto-config/peerOrganizations/org2.anbang.com/msp/tlscacerts/tlsca.org2.anbang.com-cert.pem
+PEERPEM=/Users/idongjae/anbang-server/anbang-network/channel/crypto-config/peerOrganizations/org1.anbang.com/peers/peer0.org1.anbang.com/msp/tlscacerts/tlsca.org1.anbang.com-cert.pem
+CAPEM=/Users/idongjae/anbang-server/anbang-network/channel/crypto-config/peerOrganizations/org1.anbang.com/peers/peer0.org1.anbang.com/msp/tlscacerts/tlsca.org1.anbang.com-cert.pem
 
-"$(json_cco $ORG $POPORT1 $POPORT2 $CAPORT $PEERPEM $CAPEM)" > ../json/connection-org2.json
+echo "$(json_cco $ORG $P0PORT $P1PORT $CAPORT $PEERPEM $CAPEM)" > ../json/connection-org2.json

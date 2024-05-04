@@ -25,7 +25,7 @@
   },
   "peers": {
     "peer0.org${ORG}.anbang.com": {
-      "url": "grpcs://3.37.225.0:${P0PORT1}",
+      "url": "grpcs://3.37.225.0:${P0PORT}",
       "tlsCACerts": {
         "pem": "${PEERPEM}"
       },
@@ -35,7 +35,7 @@
       }
     },
     "peer1.org${ORG}.anbang.com": {
-      "url": "grpcs://3.37.225.0:${P0PORT2}",
+      "url": "grpcs://3.37.225.0:${P1PORT}",
       "tlsCACerts": {
         "pem": "${PEERPEM}"
       },
