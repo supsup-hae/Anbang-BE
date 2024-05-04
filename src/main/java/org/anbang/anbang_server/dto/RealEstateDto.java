@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class RealEstateDto {
-  private String userID;
-  private String homeID;
+  private String userId;
+  private String homeId;
   private String owner;
   private String address;
   private String price;

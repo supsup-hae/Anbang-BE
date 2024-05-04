@@ -9,8 +9,10 @@ import lombok.ToString;
 @Data
 @Getter
 @ToString
-public class UserDto {
-  String userId;
-  String affiliation;
+public class AdminDto {
+
   String adminId;
+  String adminPw;
+  String affiliation;
+
 }
