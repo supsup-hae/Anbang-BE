@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.core.io.Resource;
 
 
 @Getter
@@ -16,8 +17,8 @@ public class GatewayProperties {
     private String networkUrlCa2;
     private URL walletUrl;
     private String walletName;
-    private Path networkConfigOrg1;
-    private Path networkConfigOrg2;
+    private Resource networkConfigOrg1;
+    private Resource  networkConfigOrg2;
     private String channelName;
     private String chaincodeName;
     private boolean discovery;
