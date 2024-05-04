@@ -16,19 +16,38 @@ public class ShellRunner {
           BUFFER_SIZE);
       BufferedReader errorReader = new BufferedReader(
           new InputStreamReader(process.getErrorStream()), BUFFER_SIZE);
-      String errorLine = null;
-      String line = null;
 
-      while ((line = reader.readLine()) != null || (errorLine = errorReader.readLine()) != null) {
-        if (line != null) {
-          System.out.println(line);
-        } else {
-          System.err.println(errorLine);
+      Thread outputThread = new Thread(() -> {
+        String line;
+        try {
+          while ((line = reader.readLine()) != null) {
+            System.out.println(line);
+          }
+        } catch (IOException e) {
+          e.printStackTrace();
         }
-      }
+      });
+      outputThread.start();
 
+      Thread errorThread = new Thread(() -> {
+        String line;
+        try {
+          while ((line = errorReader.readLine()) != null) {
+            System.err.println(line);
+          }
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      });
+      errorThread.start();
+
+      // 프로세스의 종료를 기다림
       int exitCode = process.waitFor();
-      System.out.println("Script execution finished with exit code: " + exitCode);
+      System.out.println("스크립트 실행이 종료되었습니다. 종료코드: " + exitCode);
+
+      // 스레드들이 종료될 때까지 대기
+      outputThread.join();
+      errorThread.join();
 
     } catch (IOException | InterruptedException e) {
       e.printStackTrace();
