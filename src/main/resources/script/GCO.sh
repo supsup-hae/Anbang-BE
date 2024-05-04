@@ -13,7 +13,7 @@ function json_cco {
         -e "s/\${CAPORT}/$4/" \
         -e "s#\${PEERPEM}#$PP#" \
         -e "s#\${CAPEM}#$CP#" \
-        ../config/cco-template.json
+        ../json/cco-template.json
 }
 
 ORG=1
