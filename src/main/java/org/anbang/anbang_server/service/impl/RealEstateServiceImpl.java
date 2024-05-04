@@ -19,7 +19,7 @@ public class RealEstateServiceImpl implements RealEstateService {
   private final static String BUILD_CA_CMD = "sh src/main/resources/script/SC.sh";
   private final static String DEPLOY_CC_CMD = "sh src/main/resources/script/CC.sh";
 
-  private final static String CREATE_COC_CMD = "sh src/main/resources/script/COC.sh";
+  private final static String CREATE_COC_CMD = "sh src/main/resources/script/GCO.sh";
 
 
   private final static AnbangRealEstateTransfer TRANSFER = new AnbangRealEstateTransfer();
