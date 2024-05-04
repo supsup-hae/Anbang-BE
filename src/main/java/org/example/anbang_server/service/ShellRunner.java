@@ -3,59 +3,36 @@ package org.example.anbang_server.service;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ShellRunner {
 
-  public Map<Integer, String> execCommand(String... str) {
-    Map<Integer, String> map = new HashMap<>();
-    ProcessBuilder pb = new ProcessBuilder(str);
-    pb.redirectErrorStream(true);
-    Process process = null;
-    try {
-      process = pb.start();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+  private final static int BUFFER_SIZE = 8192 * 4;
 
-    BufferedReader reader = null;
-    if (process != null) {
-      reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-    }
-
-    String line;
-    StringBuilder stringBuilder = new StringBuilder();
+  public static void execCommand(String command) {
     try {
-      if (reader != null) {
-        while ((line = reader.readLine()) != null) {
-          stringBuilder.append(line).append("\n");
+      Process process = Runtime.getRuntime().exec(command);
+
+      BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()),
+          BUFFER_SIZE);
+      BufferedReader errorReader = new BufferedReader(
+          new InputStreamReader(process.getErrorStream()), BUFFER_SIZE);
+      String errorLine = null;
+      String line = null;
+
+      while ((line = reader.readLine()) != null || (errorLine = errorReader.readLine()) != null) {
+        if (line != null) {
+          System.out.println(line);
+        } else {
+          System.err.println(errorLine);
         }
       }
-    } catch (IOException e) {
+
+      int exitCode = process.waitFor();
+      System.out.println("Script execution finished with exit code: " + exitCode);
+
+    } catch (IOException | InterruptedException e) {
       e.printStackTrace();
     }
-
-    try {
-      if (process != null) {
-        process.waitFor();
-      }
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-
-    if (process != null) {
-      map.put(0, String.valueOf(process.exitValue()));
-    }
-
-    try {
-      map.put(1, stringBuilder.toString());
-    } catch (StringIndexOutOfBoundsException e) {
-      if (stringBuilder.toString().isEmpty()) {
-        return map;
-      }
-    }
-    return map;
   }
 
 }
