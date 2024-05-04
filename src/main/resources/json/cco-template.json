@@ -1,0 +1,60 @@
+{
+  "name": "anbang-network-org${ORG}",
+  "version": "1.0.0",
+  "client": {
+    "organization": "Org${ORG}",
+    "connection": {
+      "timeout": {
+        "peer": {
+          "endorser": "300"
+        }
+      }
+    }
+  },
+  "organizations": {
+    "Org${ORG}": {
+      "mspid": "Org${ORG}MSP",
+      "peers": [
+        "peer0.org${ORG}.anbang.com",
+        "peer1.org${ORG}.anbang.com"
+      ],
+      "certificateAuthorities": [
+        "ca.org${ORG}.anbang.com"
+      ]
+    }
+  },
+  "peers": {
+    "peer0.org${ORG}.anbang.com": {
+      "url": "grpcs://3.37.225.0:${P0PORT}",
+      "tlsCACerts": {
+        "pem": "${PEERPEM}"
+      },
+      "grpcOptions": {
+        "ssl-target-name-override": "peer0.org${ORG}.anbang.com",
+        "hostnameOverride": "peer0.org${ORG}.anbang.com"
+      }
+    },
+    "peer1.org${ORG}.anbang.com": {
+      "url": "grpcs://3.37.225.0:${P1PORT}",
+      "tlsCACerts": {
+        "pem": "${PEERPEM}"
+      },
+      "grpcOptions": {
+        "ssl-target-name-override": "peer0.org${ORG}.anbang.com",
+        "hostnameOverride": "peer0.org${ORG}.anbang.com"
+      }
+    }
+  },
+  "certificateAuthorities": {
+    "ca.org${ORG}.anbang.com": {
+      "url": "https://3.37.225.0:${CAPORT}",
+      "caName": "ca.org${ORG}.anbang.com",
+      "tlsCACerts": {
+        "pem": "${CAPEM}"
+      },
+      "httpOptions": {
+        "verify": false
+      }
+    }
+  }
+}

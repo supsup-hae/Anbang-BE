@@ -12,9 +12,12 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "gateway")
 public class GatewayProperties {
 
+    private String networkUrlCa1;
+    private String networkUrlCa2;
     private URL walletUrl;
     private String walletName;
-    private Path networkConfig;
+    private Path networkConfigOrg1;
+    private Path networkConfigOrg2;
     private String channelName;
     private String chaincodeName;
     private boolean discovery;
