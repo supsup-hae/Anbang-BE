@@ -19,6 +19,9 @@ public class RealEstateServiceImpl implements RealEstateService {
   private final static String BUILD_CA_CMD = "sh src/main/resources/script/SC.sh";
   private final static String DEPLOY_CC_CMD = "sh src/main/resources/script/CC.sh";
 
+  private final static String CREATE_COC_CMD = "sh src/main/resources/script/GCO.sh";
+
+
   private final static AnbangRealEstateTransfer TRANSFER = new AnbangRealEstateTransfer();
   private Context ctx;
 
@@ -26,7 +29,7 @@ public class RealEstateServiceImpl implements RealEstateService {
   @Override
   public ResponseEntity<String> searchRealEstate(String homeID) {
     try {
-      return new ResponseEntity(TRANSFER.readAnbangRealEstate(ctx, homeID), HttpStatus.OK);
+      return new ResponseEntity<>(String.valueOf(TRANSFER.readAnbangRealEstate(ctx, homeID)), HttpStatus.OK);
     } catch (ChaincodeException e) {
       e.printStackTrace();
       return new ResponseEntity<>("매물 검색 실패", HttpStatus.NO_CONTENT);
@@ -36,9 +39,7 @@ public class RealEstateServiceImpl implements RealEstateService {
   @Override
   public ResponseEntity<String> updateRealEstate(RealEstateDto realEstateDto) {
     try {
-      return new ResponseEntity<>(
-          TRANSFER.updateAnbangRealEstate(ctx, realEstateDto.getHomeID(), realEstateDto.getOwner(),
-              realEstateDto.getHomeID(), Long.parseLong(realEstateDto.getPrice())).toString(), HttpStatus.OK);
+      return new ResponseEntity<>(String.valueOf(TRANSFER.updateAnbangRealEstate(ctx, realEstateDto.getHomeId(), realEstateDto.getOwner(), realEstateDto.getAddress(), realEstateDto.getPrice())), HttpStatus.OK);
     } catch (ChaincodeException e) {
       e.printStackTrace();
       return new ResponseEntity<>("매물 업데이트 실패", HttpStatus.BAD_REQUEST);
@@ -49,7 +50,7 @@ public class RealEstateServiceImpl implements RealEstateService {
   public ResponseEntity<String> transferRealEstate(String homeID,
       String newOwner) {
     try {
-      return new ResponseEntity<>(TRANSFER.transferAnbangRealEstate(ctx, homeID, newOwner),
+      return new ResponseEntity<>(String.valueOf(TRANSFER.transferAnbangRealEstate(ctx, homeID, newOwner)),
           HttpStatus.OK);
     } catch (ChaincodeException e) {
       e.printStackTrace();
@@ -71,7 +72,7 @@ public class RealEstateServiceImpl implements RealEstateService {
   @Override
   public ResponseEntity<String> queryAllRealEstate() {
     try {
-      return new ResponseEntity<>(TRANSFER.queryAllAnbangRealEstate(ctx), HttpStatus.OK);
+      return new ResponseEntity<>(String.valueOf(TRANSFER.queryAllAnbangRealEstate(ctx)), HttpStatus.OK);
     } catch (Exception e) {
       e.printStackTrace();
       return new ResponseEntity<>("원장 정보 검색 실패", HttpStatus.NOT_FOUND);
@@ -100,6 +101,11 @@ public class RealEstateServiceImpl implements RealEstateService {
   @Override
   public void deployChainCode() {
     ShellRunner.execCommand(DEPLOY_CC_CMD);
+  }
+
+  @Override
+  public void createNetworkConnection() {
+    ShellRunner.execCommand(CREATE_COC_CMD);
   }
 
 

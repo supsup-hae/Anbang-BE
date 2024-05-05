@@ -1,7 +1,9 @@
 package org.anbang.anbang_server.Controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.anbang.anbang_server.dto.AdminDto;
 import org.anbang.anbang_server.dto.RealEstateDto;
+import org.anbang.anbang_server.dto.UserDto;
 import org.anbang.anbang_server.service.AnbangCAUserService;
 import org.anbang.anbang_server.service.GateWayService;
 import org.anbang.anbang_server.service.RealEstateService;
@@ -35,27 +37,28 @@ public class PropertyController {
 
   @PostMapping("/create")
   public ResponseEntity<String> createRealEstate(@RequestBody RealEstateDto realEstateDto) {
-    return gateWayService.createAnbangRealEstate(realEstateDto.getUserID(),
-        realEstateDto.getHomeID(),
+    return gateWayService.createAnbangRealEstate(realEstateDto.getUserId(),
+        realEstateDto.getHomeId(),
         realEstateDto.getOwner(),
         realEstateDto.getAddress(),
         realEstateDto.getPrice());
   }
 
-//  @PostMapping("/register")
-//  public ResponseEntity<String> enrollClient(@RequestBody UserDto userDto) {
-//    return anbangCAUserService.registerUser(userDto.getUuid());
-//  }
+  @PostMapping("/register")
+  public ResponseEntity<String> registerUser(@RequestBody UserDto userDto) throws Exception {
+    return anbangCAUserService.registerUser(userDto.getUserId(), userDto.getAffiliation(), userDto.getAffiliation());
+  }
 
-//  @PostMapping("/enroll")
-//  public ResponseEntity<String> enrollClient(@RequestBody UserDto userDto) {
-//    return anbangCAUserService.enrollAdmin(userDto.getUuid());
-//  }
+  @PostMapping("/enroll")
+  public ResponseEntity<String> enrollAdmin(@RequestBody AdminDto adminDto) throws Exception {
+    return anbangCAUserService.enrollAdmin(adminDto.getAdminId(), adminDto.getAdminPw(), adminDto.getAffiliation());
+  }
+
 
   @GetMapping("/build")
   public ResponseEntity<String> buildServerCA() {
     propertyService.buildChannelCA();
-    return new ResponseEntity<>("Fabric CA Channel Built", HttpStatus.OK);
+    return new ResponseEntity<>("Fabric CA Channel Built", HttpStatus.CREATED);
   }
 
   @GetMapping("/deploy")
@@ -64,10 +67,15 @@ public class PropertyController {
     return new ResponseEntity<>("ChainCode Deploy Success", HttpStatus.OK);
   }
 
+  @GetMapping("/connection")
+  public ResponseEntity<String> createNetworkConnection() {
+    propertyService.createNetworkConnection();
+    return new ResponseEntity<>("Network Connection Created", HttpStatus.CREATED);
+  }
 
   @GetMapping("/search")
   public ResponseEntity<String> searchRealEstate(@RequestBody RealEstateDto realEstateDto) {
-    return propertyService.searchRealEstate(realEstateDto.getHomeID());
+    return propertyService.searchRealEstate(realEstateDto.getHomeId());
   }
 
   @PostMapping("/update")
@@ -77,17 +85,17 @@ public class PropertyController {
 
   @PostMapping("/transfer")
   public ResponseEntity<String> transferRealEstate(@RequestBody RealEstateDto realEstateDto) {
-    return propertyService.transferRealEstate(realEstateDto.getHomeID(), realEstateDto.getOwner());
+    return propertyService.transferRealEstate(realEstateDto.getHomeId(), realEstateDto.getOwner());
   }
 
   @GetMapping("/delete")
   public ResponseEntity<String> deleteRealEstate(@RequestBody RealEstateDto realEstateDto) {
-    return propertyService.deleteRealEstate(realEstateDto.getHomeID());
+    return propertyService.deleteRealEstate(realEstateDto.getHomeId());
   }
 
   @GetMapping("/exists")
   public ResponseEntity<String> realEstateExists(@RequestBody RealEstateDto realEstateDto) {
-    return propertyService.realEstateExists(realEstateDto.getHomeID());
+    return propertyService.realEstateExists(realEstateDto.getHomeId());
   }
 
   @GetMapping("/query-all")

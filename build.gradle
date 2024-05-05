@@ -27,6 +27,7 @@ repositories {
 dependencies {
     //hyperledger
     implementation 'org.hyperledger.fabric:fabric-gateway-java:2.2.1'
+    implementation 'org.hyperledger.fabric-chaincode-java:fabric-chaincode-shim:2.5.1'
 
     implementation files('build/libs/anbang-chaincode-1.0-SNAPSHOT.jar')
     implementation files('build/libs/anbang-chaincode.jar')

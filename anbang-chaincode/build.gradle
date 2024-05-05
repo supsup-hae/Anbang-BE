@@ -50,11 +50,11 @@ dependencies {
     }
 
     checkstyleMain{
-       source ='src/main/java/org/anbang/realestate/transfer'
+       source ='src/main/java/org/anbang/property/transfer'
     }
 
     checkstyleTest{
-       source ='src/test/java/org/anbang/realestate/transfer/test'
+       source ='src/test/java/org/anbang/property/transfer/test'
     }
 
 jacocoTestReport{
