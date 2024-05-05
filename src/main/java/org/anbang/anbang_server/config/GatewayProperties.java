@@ -1,7 +1,6 @@
 package org.anbang.anbang_server.config;
 
 import java.net.URL;
-import java.nio.file.Path;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -18,7 +17,7 @@ public class GatewayProperties {
     private URL walletUrl;
     private String walletName;
     private Resource networkConfigOrg1;
-    private Resource  networkConfigOrg2;
+    private Resource networkConfigOrg2;
     private String channelName;
     private String chaincodeName;
     private boolean discovery;
