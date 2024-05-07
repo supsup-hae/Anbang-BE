@@ -51,7 +51,6 @@ public class AnbangCAUserServiceImpl implements AnbangCAUserService {
     }
     switch (affiliation) {
       case BUYER:
-        enrollmentRequest.addHost(gatewayProperties.getNetworkUrlCa1());
         Enrollment adminEnrollment = caClient.caClient1().enroll(adminId, adminPw, enrollmentRequest);
         Identity identity = Identities.newX509Identity(orgMSPId, adminEnrollment);
         gatewayConfiguration.wallet().put(adminId, identity);
@@ -59,7 +58,6 @@ public class AnbangCAUserServiceImpl implements AnbangCAUserService {
         return new ResponseEntity<>("org1 관리자 등록 완료", HttpStatus.OK);
 
       case SELLER:
-        enrollmentRequest.addHost(gatewayProperties.getNetworkUrlCa2());
         Enrollment adminEnrollment2 = caClient.caClient2().enroll(adminId, adminPw, enrollmentRequest);
         Identity identity2 = Identities.newX509Identity(orgMSPId, adminEnrollment2);
         gatewayConfiguration.wallet().put(adminId, identity2);
