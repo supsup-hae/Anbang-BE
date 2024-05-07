@@ -1,6 +1,7 @@
 package org.anbang.anbang_server.Controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.anbang.anbang_server.dto.AdminDto;
 import org.anbang.anbang_server.dto.RealEstateDto;
 import org.anbang.anbang_server.service.RealEstateService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,6 @@ public class PropertyController {
     this.propertyService = propertyService;
   }
 
-/*
 
   private final GateWayService gateWayService;
   private final AnbangCAUserService anbangCAUserService;
@@ -55,7 +55,6 @@ public class PropertyController {
     return anbangCAUserService.enrollAdmin(adminDto.getAdminId(), adminDto.getAdminPw(), adminDto.getAffiliation());
   }
 
-*/
 
   @GetMapping("/build")
   public ResponseEntity<String> buildServerCA() {

@@ -1,4 +1,3 @@
-/*
 package org.anbang.anbang_server.config;
 
 import lombok.Getter;
@@ -17,4 +16,3 @@ public class CAClientProperties {
         private String pemFile2;
         private boolean allowAllHostNames;
 }
-*/

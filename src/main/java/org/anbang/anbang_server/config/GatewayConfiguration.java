@@ -1,4 +1,3 @@
-/*
 package org.anbang.anbang_server.config;
 
 import org.hyperledger.fabric.gateway.Wallet;
@@ -22,4 +21,3 @@ public class GatewayConfiguration {
     }
 
 }
-*/

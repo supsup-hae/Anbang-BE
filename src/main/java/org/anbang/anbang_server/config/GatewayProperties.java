@@ -1,4 +1,3 @@
-/*
 package org.anbang.anbang_server.config;
 
 import java.net.URL;
@@ -25,4 +24,3 @@ public class GatewayProperties {
 
 }
 
-*/
