@@ -3,7 +3,13 @@ package org.anbang.anbang_server.Controller;
 import lombok.extern.slf4j.Slf4j;
 import org.anbang.anbang_server.dto.AdminDto;
 import org.anbang.anbang_server.dto.RealEstateDto;
+import org.anbang.anbang_server.dto.UserDto;
+import org.anbang.anbang_server.service.AnbangCAUserService;
+import org.anbang.anbang_server.service.GateWayService;
 import org.anbang.anbang_server.service.RealEstateService;
+import org.anbang.anbang_server.service.impl.AnbangCAUserServiceImpl;
+import org.anbang.anbang_server.service.impl.GatewayServiceImpl;
+import org.anbang.anbang_server.service.impl.RealEstateServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +25,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class PropertyController {
 
   private final RealEstateService propertyService;
-
-  @Autowired
-  public PropertyController(RealEstateService propertyService) {
-    this.propertyService = propertyService;
-  }
-
 
   private final GateWayService gateWayService;
   private final AnbangCAUserService anbangCAUserService;
