@@ -1,3 +1,4 @@
+/*
 package org.anbang.anbang_server.config;
 
 import java.util.Properties;
@@ -40,3 +41,4 @@ public class CAClientConfiguration {
         return caClient;
     }
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package org.anbang.anbang_server.service.impl;
 
 import org.anbang.anbang_server.config.GatewayConfiguration;
@@ -50,3 +51,4 @@ public class GatewayServiceImpl implements GateWayService {
   }
 
 }
+*/

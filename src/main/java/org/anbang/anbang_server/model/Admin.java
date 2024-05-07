@@ -5,8 +5,8 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class User {
-  String userId;
-  String affiliation;
+public class Admin {
   String adminId;
+  String adminPw;
+  String affiliation;
 }
