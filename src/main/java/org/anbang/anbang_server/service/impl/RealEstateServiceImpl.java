@@ -112,15 +112,13 @@ public class RealEstateServiceImpl implements RealEstateService {
     ShellRunner.execCommand(CREATE_COC_CMD);
   }
 
-  /**
-   * @param adminDto
-   */
   @Override
-  public void testScript(AdminDto adminDto) {
+  public ResponseEntity<String> testScript(AdminDto adminDto) {
     ShellRunner.execCommand(TEST_CMD + " " +
         adminDto.getAdminId() + " " +
         adminDto.getAdminPw() + " " +
         adminDto.getAffiliation());
+    return new ResponseEntity<>("test 시행", HttpStatus.OK);
   }
 
 

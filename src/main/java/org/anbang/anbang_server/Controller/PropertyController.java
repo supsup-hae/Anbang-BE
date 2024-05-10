@@ -55,6 +55,11 @@ public class PropertyController {
     return anbangCAUserService.enrollAdmin(adminDto.getAdminId(), adminDto.getAdminPw(), adminDto.getAffiliation());
   }
 
+  @PostMapping("/script")
+  public ResponseEntity<String> testScript(@RequestBody AdminDto adminDto) throws Exception {
+    return propertyService.testScript(adminDto);
+  }
+
 
   @GetMapping("/build")
   public ResponseEntity<String> buildServerCA() {

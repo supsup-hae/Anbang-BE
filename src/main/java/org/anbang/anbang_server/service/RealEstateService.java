@@ -24,6 +24,6 @@ public interface RealEstateService {
 
   void createNetworkConnection();
 
-  void testScript(AdminDto adminDto);
+  ResponseEntity<String> testScript(AdminDto adminDto);
 
 }
