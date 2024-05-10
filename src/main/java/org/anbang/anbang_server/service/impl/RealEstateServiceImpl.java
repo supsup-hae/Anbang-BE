@@ -2,6 +2,7 @@ package org.anbang.anbang_server.service.impl;
 
 
 import lombok.extern.slf4j.Slf4j;
+import org.anbang.anbang_server.dto.AdminDto;
 import org.anbang.anbang_server.dto.RealEstateDto;
 import org.anbang.anbang_server.service.RealEstateService;
 import org.anbang.anbang_server.service.ShellRunner;
@@ -20,6 +21,7 @@ public class RealEstateServiceImpl implements RealEstateService {
   private final static String DEPLOY_CC_CMD = "sh src/main/resources/script/CC.sh";
 
   private final static String CREATE_COC_CMD = "sh src/main/resources/script/GCO.sh";
+  private final static String TEST_CMD = "sh src/main/resources/script/test.sh";
 
 
   private final static AnbangRealEstateTransfer TRANSFER = new AnbangRealEstateTransfer();
@@ -39,7 +41,9 @@ public class RealEstateServiceImpl implements RealEstateService {
   @Override
   public ResponseEntity<String> updateRealEstate(RealEstateDto realEstateDto) {
     try {
-      return new ResponseEntity<>(String.valueOf(TRANSFER.updateAnbangRealEstate(ctx, realEstateDto.getHomeId(), realEstateDto.getOwner(), realEstateDto.getAddress(), realEstateDto.getPrice())), HttpStatus.OK);
+      return new ResponseEntity<>(String.valueOf(
+          TRANSFER.updateAnbangRealEstate(ctx, realEstateDto.getHomeId(), realEstateDto.getOwner(), realEstateDto.getAddress(),
+              realEstateDto.getPrice())), HttpStatus.OK);
     } catch (ChaincodeException e) {
       e.printStackTrace();
       return new ResponseEntity<>("매물 업데이트 실패", HttpStatus.BAD_REQUEST);
@@ -106,6 +110,17 @@ public class RealEstateServiceImpl implements RealEstateService {
   @Override
   public void createNetworkConnection() {
     ShellRunner.execCommand(CREATE_COC_CMD);
+  }
+
+  /**
+   * @param adminDto
+   */
+  @Override
+  public void testScript(AdminDto adminDto) {
+    ShellRunner.execCommand(TEST_CMD + " " +
+        adminDto.getAdminId() + " " +
+        adminDto.getAdminPw() + " " +
+        adminDto.getAffiliation());
   }
 
 

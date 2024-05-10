@@ -1,5 +1,6 @@
 package org.anbang.anbang_server.service;
 
+import org.anbang.anbang_server.dto.AdminDto;
 import org.anbang.anbang_server.dto.RealEstateDto;
 import org.springframework.http.ResponseEntity;
 
@@ -22,4 +23,7 @@ public interface RealEstateService {
   void deployChainCode();
 
   void createNetworkConnection();
+
+  void testScript(AdminDto adminDto);
+
 }
