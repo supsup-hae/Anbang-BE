@@ -1,0 +1,84 @@
+version: '2'
+
+networks:
+  anbang-ca:
+
+services:
+  
+  ordererOrganization.anbang.com:
+    container_name: ordererOrganization.anbang.com
+    image: hyperledger/fabric-ca:1.5
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    environment: 
+      - FABRIC_CA_HOME=/etc/hyperledger/anbang-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ordererOrganization.anbang.com
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_CSR_CN=ordererOrganization.anbang.com 
+      - FABRIC_CA_SERVER_CSR_HOSTS=localhost
+      - FABRIC_CA_SERVER_DEBUG=true
+    volumes:
+      - ./ordererOrganization/:/etc/hyperledger/anbang-ca-server
+    hostname: localhost
+    ports:
+      - "7054:7054"
+    networks:
+      - anbang-ca
+
+  buyerOrganization.anbang.com:
+    container_name: buyerOrganization.anbang.com
+    image: hyperledger/fabric-ca:1.5
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    environment: 
+      - FABRIC_CA_HOME=/etc/hyperledger/anbang-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=buyerOrganization.anbang.com
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_CSR_CN=buyerOrganization.anbang.com
+      - FABRIC_CA_SERVER_CSR_HOSTS=localhost 
+      - FABRIC_CA_SERVER_DEBUG=true
+    volumes:
+      - ./buyerOrganization/:/etc/hyperledger/anbang-ca-server
+    hostname: localhost
+    ports:
+      - "8054:7054"
+    networks:
+      - anbang-ca
+      
+  sellerOrganization.anbang.com:
+    container_name: sellerOrganization.anbang.com
+    image: hyperledger/fabric-ca:1.5
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    environment: 
+      - FABRIC_CA_HOME=/etc/hyperledger/anbang-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=sellerOrganization.anbang.com
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_CSR_CN=sellerOrganization.anbang.com
+      - FABRIC_CA_SERVER_CSR_HOSTS=localhost 
+      - FABRIC_CA_SERVER_DEBUG=true
+    volumes:
+      - ./sellerOrganization/:/etc/hyperledger/anbang-ca-server
+    hostname: localhost
+    ports:
+      - "9054:7054"
+    networks:
+      - anbang-ca
+
+  agentOrganization.anbang.com:
+    container_name: agentOrganization.anbang.com
+    image: hyperledger/fabric-ca:1.5
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    environment: 
+      - FABRIC_CA_HOME=/etc/hyperledger/anbang-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=agentOrganization.anbang.com
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_CSR_CN=agentOrganization.anbang.com
+      - FABRIC_CA_SERVER_CSR_HOSTS=localhost 
+      - FABRIC_CA_SERVER_DEBUG=true
+    volumes:
+      - ./agentOrganization/:/etc/hyperledger/anbang-ca-server
+    hostname: localhost
+    ports:
+      - "10054:7054"
+    networks:
+      - anbang-ca
+
+

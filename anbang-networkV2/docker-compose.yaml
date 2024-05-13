@@ -1,0 +1,422 @@
+version: "2"
+
+networks:
+  anbang:
+
+services:
+
+  orderer1.anbang.com:
+    container_name: orderer1.anbang.com
+    image: hyperledger/fabric-orderer:2.5
+    environment:
+      - ORDERER_GENERAL_LOGLEVEL=info
+      - FABRIC_LOGGING_SPEC=INFO
+      - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+      - ORDERER_GENERAL_GENESISMETHOD=file
+      - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/genesis.block
+      - ORDERER_GENERAL_LOCALMSPID=ordererMSP
+      - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
+      - ORDERER_GENERAL_TLS_ENABLED=true
+      - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+      - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+      - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+      - ORDERER_KAFKA_VERBOSE=true
+      - ORDERER_GENERAL_CLUSTER_CLIENTCERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+      - ORDERER_GENERAL_CLUSTER_CLIENTPRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+      - ORDERER_GENERAL_CLUSTER_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+      - ORDERER_METRICS_PROVIDER=prometheus
+      - ORDERER_OPERATIONS_LISTENADDRESS=0.0.0.0:8443
+      - ORDERER_GENERAL_LISTENPORT=7050
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/orderer
+    command: orderer
+    ports:
+      - 7050:7050
+      - 8443:8443
+    networks:
+      - anbang
+    volumes:
+      - ./anbang-ca-server/ordererOrganization/anbang.com/orderers/orderer1.anbang.com/msp:/var/hyperledger/orderer/msp
+      - ./anbang-ca-server/ordererOrganization/anbang.com/orderers/orderer1.anbang.com/tls:/var/hyperledger/orderer/tls
+      - ./init-artifacts/genesis.block:/var/hyperledger/orderer/genesis.block
+
+  orderer2.anbang.com:
+    container_name: orderer2.anbang.com
+    image: hyperledger/fabric-orderer:2.5
+    environment:
+      - ORDERER_GENERAL_LOGLEVEL=info
+      - FABRIC_LOGGING_SPEC=INFO
+      - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+      - ORDERER_GENERAL_GENESISMETHOD=file
+      - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/genesis.block
+      - ORDERER_GENERAL_LOCALMSPID=ordererMSP
+      - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
+      - ORDERER_GENERAL_TLS_ENABLED=true
+      - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+      - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+      - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+      - ORDERER_KAFKA_VERBOSE=true
+      - ORDERER_GENERAL_CLUSTER_CLIENTCERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+      - ORDERER_GENERAL_CLUSTER_CLIENTPRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+      - ORDERER_GENERAL_CLUSTER_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+      - ORDERER_METRICS_PROVIDER=prometheus
+      - ORDERER_OPERATIONS_LISTENADDRESS=0.0.0.0:8443
+      - ORDERER_GENERAL_LISTENPORT=8050
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/orderer
+    command: orderer
+    ports:
+      - 8050:8050
+      - 8444:8443
+    networks:
+      - anbang
+    volumes:
+      - ./anbang-ca-server/ordererOrganization/anbang.com/orderers/orderer2.anbang.com/msp:/var/hyperledger/orderer/msp
+      - ./anbang-ca-server/ordererOrganization/anbang.com/orderers/orderer2.anbang.com/tls:/var/hyperledger/orderer/tls
+      - ./init-artifacts/genesis.block:/var/hyperledger/orderer/genesis.block
+
+  orderer3.anbang.com:
+    container_name: orderer3.anbang.com
+    image: hyperledger/fabric-orderer:2.5
+    environment:
+      - ORDERER_GENERAL_LOGLEVEL=info
+      - FABRIC_LOGGING_SPEC=INFO
+      - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+      - ORDERER_GENERAL_GENESISMETHOD=file
+      - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/genesis.block
+      - ORDERER_GENERAL_LOCALMSPID=ordererMSP
+      - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
+      - ORDERER_GENERAL_TLS_ENABLED=true
+      - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+      - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+      - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+      - ORDERER_KAFKA_VERBOSE=true
+      - ORDERER_GENERAL_CLUSTER_CLIENTCERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+      - ORDERER_GENERAL_CLUSTER_CLIENTPRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+      - ORDERER_GENERAL_CLUSTER_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+      - ORDERER_METRICS_PROVIDER=prometheus
+      - ORDERER_OPERATIONS_LISTENADDRESS=0.0.0.0:8443
+      - ORDERER_GENERAL_LISTENPORT=9050
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/orderer
+    command: orderer
+    ports:
+      - 9050:9050
+      - 8445:8443
+    networks:
+      - anbang
+    volumes:
+      - ./anbang-ca-server/ordererOrganization/anbang.com/orderers/orderer3.anbang.com/msp:/var/hyperledger/orderer/msp
+      - ./anbang-ca-server/ordererOrganization/anbang.com/orderers/orderer3.anbang.com/tls:/var/hyperledger/orderer/tls
+      - ./init-artifacts/genesis.block:/var/hyperledger/orderer/genesis.block
+
+  couchdb0:
+    container_name: couchdb0
+    image: couchdb:3.3
+    environment:
+      - COUCHDB_USER=anbang
+      - COUCHDB_PASSWORD=anbangpw
+    ports:
+      - 5984:5984
+    networks:
+      - anbang
+
+  couchdb1:
+    container_name: couchdb1
+    image: couchdb:3.3
+    environment:
+      - COUCHDB_USER=anbang
+      - COUCHDB_PASSWORD=anbangpw
+    ports:
+      - 6984:5984
+    networks:
+      - anbang
+
+  couchdb2:
+    container_name: couchdb2
+    image: couchdb:3.3
+    environment:
+      - COUCHDB_USER=anbang
+      - COUCHDB_PASSWORD=anbangpw
+    ports:
+      - 7984:5984
+    networks:
+      - anbang
+
+  couchdb3:
+    container_name: couchdb3
+    image: couchdb:3.3
+    environment:
+      - COUCHDB_USER=anbang
+      - COUCHDB_PASSWORD=anbangpw
+    ports:
+      - 8984:5984
+    networks:
+      - anbang  
+
+  couchdb4:
+    container_name: couchdb4
+    image: couchdb:3.3
+    environment:
+      - COUCHDB_USER=anbang
+      - COUCHDB_PASSWORD=anbangpw
+    ports:
+      - 9984:5984
+    networks:
+      - anbang
+
+  couchdb5:
+    container_name: couchdb5
+    image: couchdb:3.3
+    environment:
+      - COUCHDB_USER=anbang
+      - COUCHDB_PASSWORD=anbangpw
+    ports:
+      - 10984:5984
+    networks:
+      - anbang
+
+  buyer1.anbang.com:
+    container_name: buyer1.anbang.com
+    extends:
+      file: ./config/base.yaml
+      service: peer-base
+    environment:
+      - FABRIC_LOGGING_SPEC=DEBUG
+      - ORDERER_GENERAL_LOGLEVEL=DBUG
+      - CORE_PEER_LOCALMSPID=buyerMSP
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=anbang-network_anbang
+
+      - CORE_PEER_ID=buyer1
+      - CORE_PEER_ADDRESS=localhost:7051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:7051
+      - CORE_PEER_CHAINCODEADDRESS=localhost:7052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
+      - CORE_PEER_GOSSIP_BOOTSTRAP=localhost:8051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=localhost:7051
+
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=localhost:5984
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=anbang
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=anbangpw
+      - CORE_METRICS_PROVIDER=prometheus
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/crypto/peer/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/crypto/peer/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/crypto/peer/tls/ca.crt
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/crypto/peer/msp
+    depends_on:
+      - couchdb0
+    ports:
+      - 7051:7051
+    volumes:
+      - ./anbang-ca-server/buyerOrganization/anbang.com/buyers/buyer1.anbang.com/msp:/etc/hyperledger/crypto/peer/msp
+      - ./anbang-ca-server/buyerOrganization/anbang.com/buyers/buyer1.anbang.com/tls:/etc/hyperledger/crypto/peer/tls
+      - /var/run/:/host/var/run/
+      - ./channel/:/etc/hyperledger/channel
+    networks:
+      - anbang
+
+  buyer2.anbang.com:
+    container_name: buyer2.anbang.com
+    extends:
+      file: ./config/base.yaml
+      service: peer-base
+    environment:
+      - FABRIC_LOGGING_SPEC=DEBUG
+      - ORDERER_GENERAL_LOGLEVEL=DBUG
+      - CORE_PEER_LOCALMSPID=buyerMSP
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=anbang-network_anbang
+
+      - CORE_PEER_ID=buyer2
+      - CORE_PEER_ADDRESS=localhost:8051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:8051
+      - CORE_PEER_CHAINCODEADDRESS=localhost:8052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:8052
+      - CORE_PEER_GOSSIP_BOOTSTRAP=localhost:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=localhost:8051
+
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=localhost:6984
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=anbang
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=anbangpw
+      - CORE_METRICS_PROVIDER=prometheus
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/crypto/peer/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/crypto/peer/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/crypto/peer/tls/ca.crt
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/crypto/peer/msp
+    depends_on:
+      - couchdb1
+    ports:
+      - 8051:8051
+    volumes:
+      - ./anbang-ca-server/buyerOrganization/anbang.com/buyers/buyer1.anbang.com/msp:/etc/hyperledger/crypto/peer/msp
+      - ./anbang-ca-server/buyerOrganization/anbang.com/buyers/buyer1.anbang.com/tls:/etc/hyperledger/crypto/peer/tls
+      - /var/run/:/host/var/run/
+      - ./channel/:/etc/hyperledger/channel
+    networks:
+      - anbang
+
+  seller1.anbang.com:
+    container_name: seller1.anbang.com
+    extends:
+      file: ./config/base.yaml
+      service: peer-base
+    environment:
+      - FABRIC_LOGGING_SPEC=DEBUG
+      - ORDERER_GENERAL_LOGLEVEL=DBUG
+      - CORE_PEER_LOCALMSPID=sellerMSP
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=anbang-network_anbang
+
+      - CORE_PEER_ID=seller1
+      - CORE_PEER_ADDRESS=localhost:9051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:9051
+      - CORE_PEER_CHAINCODEADDRESS=localhost:9052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:9052
+      - CORE_PEER_GOSSIP_BOOTSTRAP=localhost:10051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=localhost:9051
+
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=localhost:7984
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=anbang
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=anbangpw
+      - CORE_METRICS_PROVIDER=prometheus
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/crypto/peer/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/crypto/peer/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/crypto/peer/tls/ca.crt
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/crypto/peer/msp
+    depends_on:
+      - couchdb2
+    ports:
+      - 9051:9051
+    volumes:
+      - ./anbang-ca-server/sellerOrganization/anbang.com/sellers/seller1.anbang.com/msp:/etc/hyperledger/crypto/peer/msp
+      - ./anbang-ca-server/sellerOrganization/anbang.com/sellers/seller1.anbang.com/tls:/etc/hyperledger/crypto/peer/tls
+      - /var/run/:/host/var/run/
+      - ./channel/:/etc/hyperledger/channel
+    networks:
+      - anbang
+
+  seller2.anbang.com:
+    container_name: seller2.anbang.com
+    extends:
+      file: ./config/base.yaml
+      service: peer-base
+    environment:
+      - FABRIC_LOGGING_SPEC=DEBUG
+      - ORDERER_GENERAL_LOGLEVEL=DBUG
+      - CORE_PEER_LOCALMSPID=sellerMSP
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=anbang-network_anbang
+
+      - CORE_PEER_ID=seller2
+      - CORE_PEER_ADDRESS=localhost:10051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:10051
+      - CORE_PEER_CHAINCODEADDRESS=localhost:10052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:10052
+      - CORE_PEER_GOSSIP_BOOTSTRAP=localhost:9051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=localhost:10051
+
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=localhost:8984
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=anbang
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=anbangpw
+      - CORE_METRICS_PROVIDER=prometheus
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/crypto/peer/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/crypto/peer/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/crypto/peer/tls/ca.crt
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/crypto/peer/msp
+    depends_on:
+      - couchdb3
+    ports:
+      - 10051:10051
+    volumes:
+      - ./anbang-ca-server/sellerOrganization/anbang.com/sellers/seller2.anbang.com/msp:/etc/hyperledger/crypto/peer/msp
+      - ./anbang-ca-server/sellerOrganization/anbang.com/sellers/seller2.anbang.com/tls:/etc/hyperledger/crypto/peer/tls
+      - /var/run/:/host/var/run/
+      - ./channel/:/etc/hyperledger/channel
+    networks:
+      - anbang
+
+  agent1.anbang.com:
+    container_name: agent1.anbang.com
+    extends:
+      file: ./config/base.yaml
+      service: peer-base
+    environment:
+      - FABRIC_LOGGING_SPEC=DEBUG
+      - ORDERER_GENERAL_LOGLEVEL=DBUG
+      - CORE_PEER_LOCALMSPID=agentMSP
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=anbang-network_anbang
+
+      - CORE_PEER_ID=agent1
+      - CORE_PEER_ADDRESS=localhost:11051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:11051
+      - CORE_PEER_CHAINCODEADDRESS=localhost:11052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:11052
+      - CORE_PEER_GOSSIP_BOOTSTRAP=localhost:12051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=localhost:11051
+
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=localhost:9984
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=anbang
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=anbangpw
+      - CORE_METRICS_PROVIDER=prometheus
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/crypto/peer/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/crypto/peer/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/crypto/peer/tls/ca.crt
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/crypto/peer/msp
+    depends_on:
+      - couchdb4
+    ports:
+      - 11051:11051
+    volumes:
+      - ./anbang-ca-server/agentOrganization/anbang.com/agents/agent1.anbang.com/msp:/etc/hyperledger/crypto/peer/msp
+      - ./anbang-ca-server/agentOrganization/anbang.com/agents/agent1.anbang.com/tls:/etc/hyperledger/crypto/peer/tls
+      - /var/run/:/host/var/run/
+      - ./channel/:/etc/hyperledger/channel
+    networks:
+      - anbang
+
+  agent2.anbang.com:
+    container_name: agent2.anbang.com
+    extends:
+      file: ./config/base.yaml
+      service: peer-base
+    environment:
+      - FABRIC_LOGGING_SPEC=DEBUG
+      - ORDERER_GENERAL_LOGLEVEL=DBUG
+      - CORE_PEER_LOCALMSPID=agentMSP
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=anbang-network_anbang
+
+      - CORE_PEER_ID=agent2
+      - CORE_PEER_ADDRESS=localhost:12051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:12051
+      - CORE_PEER_CHAINCODEADDRESS=localhost:12052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:12052
+      - CORE_PEER_GOSSIP_BOOTSTRAP=localhost:11051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=localhost:12051
+
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=localhost:10084
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=anbang
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=anbangpw
+      - CORE_METRICS_PROVIDER=prometheus
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/crypto/peer/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/crypto/peer/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/crypto/peer/tls/ca.crt
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/crypto/peer/msp
+    depends_on:
+      - couchdb5
+    ports:
+      - 12051:12051
+    volumes:
+      - ./anbang-ca-server/agentOrganization/anbang.com/agents/agent2.anbang.com/msp:/etc/hyperledger/crypto/peer/msp
+      - ./anbang-ca-server/agentOrganization/anbang.com/agents/agent2.anbang.com/tls:/etc/hyperledger/crypto/peer/tls
+      - /var/run/:/host/var/run/
+      - ./channel/:/etc/hyperledger/channel
+    networks:
+      - anbang
+
+
